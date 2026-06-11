@@ -1,0 +1,70 @@
+<!-- ============================================================
+     SNIPPET · slide_matriz_proyectos
+     ------------------------------------------------------------
+     Matriz de iniciativas impacto x complejidad (cuadrante SVG con
+     burbujas) + lista lateral. Burbujas codificadas por alcance
+     (en scope / parcial / fuera). Coordenadas cx/cy en el espacio
+     del viewBox (no se calculan; se colocan a mano evitando solape).
+     Origen: deck SteerCo Hito 1 Temisa (2026-06-01).
+
+     Depende de las variables :root y .slide de plantilla_deck.html.
+     Mapear impacto->cy (alto arriba) y complejidad->cx (alta a la derecha).
+     ============================================================ -->
+<style>
+  .slide-eyebrow { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--imb-slate); font-weight: 600; margin-bottom: 2mm; }
+  .mx-layout { display: flex; gap: 6mm; flex: 1; min-height: 0; }
+  .mx-plot { flex: 1.5; display: flex; flex-direction: column; min-height: 0; }
+  .mx-side { flex: 1; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+  .mx-bub { cursor: default; }
+  .mx-bub text { font: 600 10px var(--font-sans); fill: var(--imb-white); }
+  .mx-side-h { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--imb-navy); margin-bottom: 1.5mm; padding-bottom: 1mm; border-bottom: 1.5px solid var(--imb-navy); }
+  .mx-item { display: flex; gap: 6px; font-size: 9px; line-height: 1.3; padding: 1.4mm 0; border-bottom: 0.5px dashed var(--imb-navy-12); color: var(--imb-navy); }
+  .mx-item .pn { flex: 0 0 auto; font-family: ui-monospace, monospace; font-weight: 700; font-size: 8.5px; width: 22px; }
+  .mx-item .dot { flex:0 0 auto; width:8px; height:8px; border-radius:50%; margin-top:3px; }
+  .mx-legend { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 2mm; font-size: 9px; color: var(--imb-navy-60); }
+  .mx-legend span { display: inline-flex; align-items: center; gap: 4px; }
+  .mx-legend i { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  .sc-e1 { fill: var(--status-green); } .bg-e1 { background: var(--status-green); }
+  .sc-par { fill: var(--status-yellow); } .bg-par { background: var(--status-yellow); }
+  .sc-out { fill: var(--imb-slate); } .bg-out { background: var(--imb-slate); }
+  .chart-note { font: italic 9px var(--font-serif); fill: var(--imb-navy-60); }
+  .ax { stroke: var(--imb-navy-20); stroke-width: 0.75; }
+  .axlabel { font: 9px var(--font-sans); fill: var(--imb-navy-60); }
+</style>
+
+<div class="slide">
+  <div class="slide-header"><div class="brand-logo"></div>
+    <div class="meta"><div>[Cliente · contexto]</div><div><strong>Matriz de iniciativas</strong></div></div></div>
+  <div class="slide-eyebrow">Roadmap · impacto × complejidad</div>
+  <h1 class="slide-title">[Mensaje: cómo se prioriza el roadmap y qué ejecuta cada etapa]</h1>
+  <div class="slide-content">
+    <div class="mx-layout">
+      <div class="mx-plot">
+        <svg viewBox="0 0 560 408" role="img" aria-label="Matriz impacto por complejidad" style="width:100%;height:auto;">
+          <line x1="297" y1="30" x2="297" y2="360" stroke="rgba(10,24,40,.10)" stroke-width="1"/>
+          <line x1="55" y1="195" x2="540" y2="195" stroke="rgba(10,24,40,.10)" stroke-width="1"/>
+          <line class="ax" x1="55" y1="30" x2="55" y2="360"/>
+          <line class="ax" x1="55" y1="360" x2="540" y2="360"/>
+          <text class="axlabel" x="297" y="392" text-anchor="middle">Complejidad / esfuerzo  →</text>
+          <text class="axlabel" x="20" y="195" text-anchor="middle" transform="rotate(-90,20,195)">Impacto  →</text>
+          <text class="chart-note" x="70" y="48">Alto impacto · baja complejidad → priorizar</text>
+          <text class="chart-note" x="525" y="48" text-anchor="end">Alto impacto · alta complejidad → planear</text>
+          <!-- repetir por iniciativa: clase sc-e1 / sc-par / sc-out -->
+          <g class="mx-bub"><circle class="sc-e1" cx="[CX]" cy="[CY]" r="15"/><text x="[CX]" y="[CY+4]" text-anchor="middle">P0</text></g>
+        </svg>
+        <div class="mx-legend">
+          <span><i class="bg-e1"></i> En Etapa 1</span>
+          <span><i class="bg-par"></i> Parcial en Etapa 1</span>
+          <span><i class="bg-out"></i> Identificado · a cotizar</span>
+        </div>
+      </div>
+      <div class="mx-side">
+        <div class="mx-side-h">Catálogo de iniciativas</div>
+        <!-- repetir .mx-item por iniciativa -->
+        <div class="mx-item"><span class="dot bg-e1"></span><span class="pn">P0</span><span>[nombre de la iniciativa]</span></div>
+        <div style="margin-top:auto;padding-top:2mm;font-size:8.5px;line-height:1.35;color:var(--imb-navy-60);font-style:italic;">[nota: la matriz es el roadmap completo; qué se ejecuta vs qué se cotiza].</div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div>Confidencial · Imberion × [Cliente]</div><div class="page-num">NN · NN</div></div>
+</div>

@@ -1,0 +1,43 @@
+<!-- ============================================================
+     SNIPPET · slide_analisis_barra
+     ------------------------------------------------------------
+     Variante de slide_analisis_panel para charts que necesitan TODO
+     el ancho (bridge waterfall, dispersion, small multiples). El chart
+     va arriba a ancho completo y los takeaways en una barra inferior de
+     2-3 columnas, con la linea "So what" debajo. Mismo chrome (action-
+     title, boton volver, fuente al pie) y mismo hover que el panel.
+     Origen: deck SteerCo Hito 1 Temisa (2026-06-01).
+
+     Requiere las clases base de slide_analisis_panel (back-btn, action,
+     tk, tk-sw, src-foot, charts, hover). Si ya pegaste ese <style> en el
+     deck, basta agregar las reglas .an-barra / .bar-msg de abajo.
+     ============================================================ -->
+<style>
+  /* reglas propias de la variante barra (lo demas se hereda de slide_analisis_panel) */
+  .an-barra { display: flex; flex-direction: column; flex: 1; min-height: 0; gap: 3mm; }
+  .an-barra .an-chart { flex: 1; }
+  .bar-msg { display: flex; gap: 4mm; align-items: stretch; }
+  .bar-msg .tk { flex: 1; }
+  .an-barra .tk-sw { margin-top: 0; }
+</style>
+
+<div class="slide">
+  <div class="slide-header"><div class="brand-logo"></div>
+    <button class="back-btn" onclick="goTo([IDX_HUB])">‹ Volver al resumen</button></div>
+  <div class="slide-eyebrow">Diagnóstico analítico · N / M · [tema]</div>
+  <h1 class="slide-title action">[Action-title: mensaje principal en forma de so-what]</h1>
+  <div class="slide-content">
+    <div class="an-barra">
+      <div class="an-chart">
+        <svg viewBox="0 0 900 250" role="img" aria-label="[descripción]"><!-- chart ancho a medida; resaltables con class="hl-t <id/clase>" --></svg>
+      </div>
+      <div class="bar-msg">
+        <div class="tk" data-hl="[selector opcional]"><span class="tk-num">1</span><span>[secundario]</span></div>
+        <div class="tk" data-hl="[selector opcional]"><span class="tk-num">2</span><span>[secundario]</span></div>
+        <div class="tk" data-hl="[selector opcional]"><span class="tk-num">3</span><span>[secundario]</span></div>
+      </div>
+      <div class="tk-sw"><span class="sw-tag">So what</span><span>[decisión o proyecto que dispara]</span></div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="src-foot">Fuente: [fuente del dato].</div><div class="page-num">NN · NN</div></div>
+</div>

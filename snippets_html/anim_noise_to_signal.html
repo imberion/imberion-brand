@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Animacion · From noise to signal (Imberion)</title>
+<!--
+  Animacion de marca "from noise to signal": particulas que parten como ruido y
+  convergen a la senal interior de la "O" del logo Imberion (path real del favicon),
+  contenida en un canvas, en loop. Reutilizable como loader, acento de hero, o detalle.
+
+  Para reusar: copiar el <canvas>, el <svg> oculto con id="nsSig" y el <script>.
+  Parametros: CW/CH (tamano), R (radio de la O), N (particulas), CYCLE (velocidad), color.
+  Owner: Rodrigo Garrido.
+-->
+<style>
+  html,body{margin:0;height:100%;background:#0A1828;display:flex;align-items:center;justify-content:center;}
+  .ns-stage{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  #nsCanvas{display:block;}
+  .ns-cap{font-family:ui-monospace,Menlo,monospace;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:rgba(200,210,220,.55);}
+  .ns-defs{position:absolute;width:0;height:0;overflow:hidden;}
+</style>
+</head>
+<body>
+  <div class="ns-stage">
+    <canvas id="nsCanvas"></canvas>
+    <div class="ns-cap">From noise to signal</div>
+  </div>
+  <svg class="ns-defs" aria-hidden="true"><path id="nsSig" d="M1049.56,169.909C1049.55,173.764 1049.46,172.947 1049.55,173.088C1051.75,176.547 1054.93,161.31 1054.52,164.312C1054.41,165.122 1055.37,162.236 1056.18,160.034C1057.69,155.969 1061.41,154.266 1063.68,152.992C1068.16,150.479 1072.44,150.082 1074.96,151.205C1078.01,152.565 1079.12,153.879 1080.85,155.045C1082.57,156.211 1084.63,157.786 1085.73,159.955C1086.82,162.124 1087.95,163.219 1089.2,166.236C1090.76,169.631 1091.93,170.978 1093.66,173.274C1095.38,175.57 1098.68,178.796 1101.35,179.963C1104.02,181.131 1106.87,181.724 1111.17,181.733C1116.51,181.745 1120.94,180.953 1124.45,179.359C1127.96,177.765 1130.64,175.573 1132.48,172.782C1133.14,171.77 1133.67,170.704 1134.15,169.596C1134.98,167.649 1135.65,165.565 1135.3,164.095C1134.31,159.896 1130.12,168.327 1128.42,169.862C1126.03,172.023 1123.25,174.142 1121.21,175.299C1119.16,176.457 1116.4,177.365 1112.84,177.357C1109.9,177.351 1107.5,176.894 1105.88,176.011C1104.26,175.129 1102.24,174.688 1101.14,172.927C1100.04,171.166 1096.5,168.015 1095.25,165.437C1093.58,161.728 1092.62,161.655 1091.3,158.196C1090.1,155.044 1088.17,152.231 1085.44,150.718C1082.72,149.205 1079.71,145.49 1074.79,145.48C1067.14,145.463 1060.27,145.673 1057.3,150.811C1056.17,152.774 1055.36,152.736 1054.53,154.704C1053.34,157.558 1049.57,166.564 1049.56,169.909Z"/></svg>
+<script>
+(function(){
+  var cv=document.getElementById('nsCanvas'), path=document.getElementById('nsSig');
+  if(!cv||!path) return;
+  var dpr=window.devicePixelRatio||2, CW=240, CH=180, R=64;
+  cv.width=CW*dpr; cv.height=CH*dpr; cv.style.width=CW+'px'; cv.style.height=CH+'px';
+  var ctx=cv.getContext('2d'); ctx.scale(dpr,dpr);
+  var cx=CW/2, cy=CH/2, CX0=1092, CY0=165, PR=58;
+  var N=200, len=path.getTotalLength(), pts=[];
+  for(var i=0;i<N;i++){
+    var p=path.getPointAtLength(len*i/N);
+    var a=Math.random()*Math.PI*2, d=Math.pow(Math.random(),0.5)*R*1.9;
+    pts.push({sx:cx+((p.x-CX0)/PR)*R, sy:cy+((p.y-CY0)/PR)*R,
+              nx:cx+Math.cos(a)*d, ny:cy+Math.sin(a)*d*0.85,
+              ph:Math.random()*6.283, r:Math.random()*1.3+0.5, al:Math.random()*0.45+0.3});
+  }
+  function ease(t){return t<0.5?2*t*t:-1+(4-2*t)*t;}
+  var f=0, CYCLE=420;
+  function draw(){
+    f++; ctx.clearRect(0,0,CW,CH);
+    var ph=(f%CYCLE)/CYCLE, conv;
+    if(ph<0.18)conv=0; else if(ph<0.52)conv=ease((ph-0.18)/0.34);
+    else if(ph<0.74)conv=1; else conv=1-ease((ph-0.74)/0.26);
+    var t=f*0.04;
+    ctx.beginPath(); ctx.arc(cx,cy,R,0,6.283);
+    ctx.strokeStyle='rgba(255,255,255,'+(0.06+conv*0.10).toFixed(3)+')'; ctx.lineWidth=1; ctx.stroke();
+    for(var i=0;i<N;i++){var p=pts[i];
+      var nx=p.nx+Math.sin(t*0.6+p.ph)*7, ny=p.ny+Math.cos(t*0.75+p.ph)*5;
+      var rx=nx+(p.sx-nx)*conv, ry=ny+(p.sy-ny)*conv;
+      ctx.beginPath(); ctx.arc(rx,ry,p.r*(1.5-conv*0.5),0,6.283);
+      ctx.fillStyle='rgba(255,255,255,'+(p.al*(0.92-conv*0.1)).toFixed(2)+')'; ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

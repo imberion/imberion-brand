@@ -1,0 +1,60 @@
+<!-- ============================================================
+     SNIPPET · slide_resumen_hub
+     ------------------------------------------------------------
+     Resumen ejecutivo tipo "hub": N temas en columnas, cada bullet
+     con su so-what y, si tiene back slide, una liga clickeable
+     (onclick="goTo(IDX)") que salta al analisis. Los bullets sin
+     back slide cuelgan en la seccion "Lo que no existe".
+     Origen: deck SteerCo Hito 1 Temisa (2026-06-01).
+
+     Depende de las variables :root y la base de plantilla_deck.html
+     (--imb-navy, --imb-paper-soft, --font-serif, .slide, .slide-content...).
+     Pegar el <style> en el <head> del deck y el <div class="slide"> en el body.
+     Ajustar grid-template-columns a # de temas (aqui 5).
+     ============================================================ -->
+<style>
+  .slide-eyebrow { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--imb-slate); font-weight: 600; margin-bottom: 2mm; }
+  .hub-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 4mm; flex: 1; min-height: 0; }
+  .hub-col { display: flex; flex-direction: column; min-height: 0; }
+  .hub-head { background: var(--imb-navy); color: var(--imb-white); padding: 2.5mm 3mm; border-radius: 2px 2px 0 0; }
+  .hub-head .hub-kicker { font-size: 8px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--imb-slate-soft); margin-bottom: 1mm; }
+  .hub-head .hub-name { font-family: var(--font-serif); font-size: 15.5px; font-weight: 500; line-height: 1.08; }
+  .hub-body { background: var(--imb-paper-soft); border: 0.5px solid var(--imb-navy-12); border-top: none; padding: 2.5mm; flex: 1; display: flex; flex-direction: column; gap: 2mm; overflow: hidden; }
+  .hub-pt { font-size: 9px; line-height: 1.32; color: var(--imb-navy); }
+  .hub-pt.link { cursor: pointer; border-radius: 2px; padding: 1mm 1.5mm; margin: -1mm -1.5mm 0; transition: background 0.12s ease; }
+  .hub-pt.link:hover { background: rgba(198,138,30,0.12); }
+  .hub-pt .hub-sw { color: var(--imb-slate-deep); }
+  .hub-pt .hub-sw b { color: var(--imb-navy); font-weight: 600; }
+  .hub-pt .seego { font-size: 7.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--status-yellow); white-space: nowrap; }
+  .hub-noex { margin-top: auto; padding-top: 2mm; border-top: 0.5px dashed var(--imb-navy-12); }
+  .hub-noex .ne-h { font-size: 7.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--status-red); margin-bottom: 1mm; }
+  .hub-noex .ne { font-size: 8.3px; line-height: 1.3; color: var(--imb-navy-60); padding-left: 8px; position: relative; margin-bottom: 0.8mm; }
+  .hub-noex .ne::before { content: "·"; position: absolute; left: 2px; color: var(--status-red); font-weight: 700; }
+</style>
+
+<div class="slide">
+  <div class="slide-header"><div class="brand-logo"></div>
+    <div class="meta"><div>[Cliente · contexto]</div><div><strong>Resumen ejecutivo</strong></div></div></div>
+  <div class="slide-eyebrow">Resumen ejecutivo · cada lectura liga a su análisis</div>
+  <h1 class="slide-title">[Mensaje hub: las N lecturas, cada una con su decisión]</h1>
+  <div class="slide-content">
+    <div class="hub-grid">
+
+      <!-- repetir .hub-col por tema -->
+      <div class="hub-col">
+        <div class="hub-head"><div class="hub-kicker">01</div><div class="hub-name">[Tema]</div></div>
+        <div class="hub-body">
+          <!-- bullet con back slide: liga via goTo(IDX 0-based) -->
+          <div class="hub-pt link" onclick="goTo([IDX])"><b>[titular].</b> [cuerpo] <span class="hub-sw"><b>So what:</b> [decisión que dispara].</span> <span class="seego">ver análisis →</span></div>
+          <!-- bullets sin back slide -->
+          <div class="hub-noex">
+            <div class="ne-h">Lo que no existe</div>
+            <div class="ne">[evidencia tipo "no existe" + so-what corto].</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="slide-footer"><div>Confidencial · Imberion × [Cliente]</div><div class="page-num">NN · NN</div></div>
+</div>

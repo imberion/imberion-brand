@@ -1,0 +1,682 @@
+/* ===========================================================================
+   Imberion. CSS Charts y Dashboards
+   ---------------------------------------------------------------------------
+   Componentes especificos para skills analiticas y dashboards: layout de
+   dashboard, KPI cards, tablas, charts SVG, tooltips, filtros, badges,
+   callouts, quadrant charts y reglas de impresion.
+
+   Depende de imberion_base.css. Mantiene paleta y tipografia del sistema.
+   Nuevo en Fase 1: este archivo no existe en el sitio publico, se construye
+   aqui para el uso de skills analiticas.
+
+   Owner: Rodrigo Garrido
+   Ultima actualizacion: 2026-05-27
+   =========================================================================== */
+
+/* ---------- Layout de dashboard ---------- */
+.dashboard {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 56px 36px 96px;
+}
+.dashboard-header { margin-bottom: 32px; }
+.dashboard-header .eyebrow { margin-bottom: 10px; }
+.dashboard-header h2 { margin-bottom: 12px; }
+.dashboard-header .lead { max-width: 720px; }
+
+.dashboard-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--white);
+  border: 1px solid var(--navy-12);
+  border-radius: var(--r);
+  margin-bottom: 24px;
+}
+.dashboard-main { display: flex; flex-direction: column; gap: 24px; }
+.dashboard-footer {
+  margin-top: 32px;
+  padding: 18px 0 0;
+  background: transparent;
+  border-top: 1px solid var(--navy-12);
+  font-size: 12px;
+  color: var(--navy-40);
+  line-height: 1.6;
+  letter-spacing: .02em;
+}
+.dashboard-footer strong { color: var(--navy-60); font-weight: 500; }
+
+/* ---------- KPI cards ---------- */
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2px;
+  background: var(--navy-12);
+  border: 1px solid var(--navy-12);
+}
+.kpi-card {
+  background: var(--white);
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.kpi-card .eyebrow { margin-bottom: 4px; }
+.kpi-card .kpi-value {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3vw, 3rem);
+  font-weight: 300;
+  line-height: 1;
+  color: var(--navy);
+  letter-spacing: -.01em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.kpi-card .kpi-unit {
+  font-size: 1rem;
+  color: var(--navy-40);
+  margin-left: 4px;
+  font-family: var(--font-body);
+}
+.kpi-card .kpi-label {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--navy-60);
+  line-height: 1.5;
+  margin-top: 4px;
+}
+.kpi-card .kpi-delta {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .02em;
+  color: var(--gray-blue);
+  margin-top: 6px;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.kpi-card .kpi-delta.up { color: #2F7A3D; }
+.kpi-card .kpi-delta.down { color: #A8412B; }
+.kpi-card .kpi-delta.neutral { color: var(--navy-60); }
+
+/* Variante oscura: usar dentro de .section--dark o .kpi-grid--dark */
+.kpi-grid--dark { background: rgba(255, 255, 255, .1); border-color: transparent; }
+.kpi-grid--dark .kpi-card { background: var(--navy); }
+.kpi-grid--dark .kpi-value { color: #fff; }
+.kpi-grid--dark .kpi-label { color: rgba(255, 255, 255, .65); }
+.kpi-grid--dark .kpi-unit { color: rgba(255, 255, 255, .45); }
+
+/* ---------- Tablas ---------- */
+.imb-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--navy);
+}
+.imb-table thead th {
+  background: var(--navy);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--navy);
+  white-space: nowrap;
+}
+.imb-table tbody td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--navy-12);
+  line-height: 1.5;
+  vertical-align: top;
+}
+.imb-table tbody tr:nth-child(even) td { background: var(--navy-06); }
+.imb-table tbody tr:hover td { background: var(--beige); }
+.imb-table .num,
+.imb-table td.num,
+.imb-table th.num {
+  text-align: right;
+  font-variant-numeric: lining-nums tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+/* Variantes de densidad */
+.imb-table--compact thead th,
+.imb-table--compact tbody td { padding: 7px 12px; font-size: 13px; }
+.imb-table--spacious thead th,
+.imb-table--spacious tbody td { padding: 18px 22px; font-size: 15px; }
+
+/* Header ordenable */
+.imb-table thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: 26px;
+}
+.imb-table thead th.sortable::after {
+  content: '\2195';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: .45;
+  font-size: 11px;
+}
+.imb-table thead th.sortable.asc::after { content: '\2191'; opacity: 1; }
+.imb-table thead th.sortable.desc::after { content: '\2193'; opacity: 1; }
+
+/* ---------- Charts SVG ---------- */
+:root {
+  /* Paleta para series de chart. Series principales en navy y gray-blue;
+     acentos para tercera/cuarta serie y categorias adicionales. */
+  --chart-series-1: #0A1828;
+  --chart-series-2: #6F859C;
+  --chart-series-3: #B2A089;
+  --chart-series-4: #4D6A85;
+  --chart-series-5: #8FA3B8;
+  --chart-series-6: #C7A98F;
+  --chart-gridline: rgba(207, 203, 198, .9);
+  --chart-axis: rgba(10, 24, 40, .45);
+  --chart-label: rgba(10, 24, 40, .6);
+
+  /* Roles semanticos sobre la paleta de series. Distintos de series-1..6
+     porque tienen semantica fija: el accent siempre destaca, el neutral
+     siempre marca subtotales o totales. */
+  --chart-series-accent: #C77A4E;
+  --chart-series-neutral: var(--navy-40);
+
+  /* Bandas, corredores y referencias dentro del area de chart */
+  --chart-corridor: rgba(111, 133, 156, .14);
+  --chart-iso-curve: var(--navy-20);
+  --chart-divider: var(--navy-20);
+  --chart-trend: var(--gray-blue);
+
+  /* Heatmaps. Secuencial: low a high. Divergente: 3 stops explicitos. */
+  --chart-heatmap-low: rgba(207, 203, 198, .22);
+  --chart-heatmap-high: var(--navy);
+  --chart-heatmap-diverging-neg: #A8412B;
+  --chart-heatmap-diverging-mid: var(--navy-12);
+  --chart-heatmap-diverging-pos: #2F7A3D;
+}
+
+.chart-container {
+  position: relative;
+  width: 100%;
+  background: var(--white);
+  padding: 24px;
+  border: 1px solid var(--navy-12);
+  border-radius: var(--r);
+}
+.chart-container > svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.chart-axis line,
+.chart-axis path { stroke: var(--chart-axis); stroke-width: 1; fill: none; }
+.chart-axis text {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: var(--chart-label);
+  letter-spacing: .02em;
+}
+.chart-gridline { stroke: var(--chart-gridline); stroke-width: 1; stroke-dasharray: 2 4; }
+
+.chart-label {
+  font-family: var(--font-body);
+  font-size: 11px;
+  fill: var(--chart-label);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.chart-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.chart-subtitle {
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: var(--navy-60);
+  margin-bottom: 16px;
+  line-height: 1.5;
+}
+
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 16px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--navy-60);
+  letter-spacing: .02em;
+}
+.chart-legend--top { margin-top: 0; margin-bottom: 16px; justify-content: flex-end; }
+.chart-legend-item { display: inline-flex; align-items: center; gap: 8px; }
+.chart-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 1px;
+  background: var(--chart-series-1);
+  display: inline-block;
+}
+
+/* ---------- Tooltips ---------- */
+.imb-tooltip {
+  position: fixed;
+  background: var(--navy);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: var(--r);
+  box-shadow: 0 4px 18px rgba(10, 24, 40, .25);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .15s ease;
+  z-index: 50;
+  max-width: 220px;
+}
+.imb-tooltip.is-visible { opacity: 1; }
+.imb-tooltip strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #fff;
+}
+.imb-tooltip .imb-tooltip-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  color: rgba(255, 255, 255, .8);
+}
+.imb-tooltip .imb-tooltip-row .num { font-variant-numeric: lining-nums tabular-nums; }
+
+/* ---------- Filtros y controles ---------- */
+.filter-dropdown {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+.filter-dropdown select {
+  appearance: none;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 8px 32px 8px 14px;
+  border: 1px solid var(--navy-12);
+  border-radius: var(--r);
+  background: var(--white);
+  color: var(--navy);
+  cursor: pointer;
+  letter-spacing: .02em;
+}
+.filter-dropdown::after {
+  content: '\25BE';
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--navy-40);
+  pointer-events: none;
+  font-size: 10px;
+}
+
+.filter-tab-group {
+  display: inline-flex;
+  gap: 2px;
+  background: var(--navy-06);
+  border-radius: var(--r);
+  padding: 3px;
+}
+.filter-tab {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: var(--navy-60);
+  cursor: pointer;
+  border-radius: 2px;
+  transition: all .18s;
+}
+.filter-tab.active { background: var(--navy); color: var(--white); }
+.filter-tab:hover:not(.active) { color: var(--navy); }
+
+.filter-search {
+  font-family: var(--font-body);
+  font-size: 13px;
+  padding: 8px 14px;
+  border: 1px solid var(--navy-12);
+  border-radius: var(--r);
+  background: var(--white);
+  color: var(--navy);
+  min-width: 220px;
+}
+.filter-search:focus {
+  outline: none;
+  border-color: var(--gray-blue);
+}
+
+/* ---------- Badges y callouts ---------- */
+.imb-badge {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: var(--navy-06);
+  color: var(--navy-60);
+}
+.imb-badge--success { background: rgba(47, 122, 61, .12); color: #2F7A3D; }
+.imb-badge--warn { background: rgba(184, 132, 28, .14); color: #8C6312; }
+.imb-badge--danger { background: rgba(168, 65, 43, .14); color: #A8412B; }
+.imb-badge--info { background: rgba(111, 133, 156, .18); color: var(--gray-blue); }
+
+.imb-callout {
+  padding: 18px 24px;
+  background: var(--white);
+  border-left: 3px solid var(--gray-blue);
+  border-radius: 0 var(--r) var(--r) 0;
+  font-size: 14px;
+  color: var(--navy);
+  line-height: 1.65;
+}
+.imb-callout--beige { background: var(--beige); }
+.imb-callout--dark {
+  background: var(--navy);
+  color: var(--white);
+  border-left-color: rgba(143, 163, 184, .5);
+}
+.imb-callout--warning {
+  background: rgba(184, 132, 28, .06);
+  border-left-color: #8C6312;
+}
+.imb-callout--warning .imb-callout-title { color: #8C6312; }
+.imb-callout strong { font-weight: 600; }
+.imb-callout .imb-callout-title {
+  display: block;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gray-blue);
+  margin-bottom: 6px;
+}
+.imb-callout--dark .imb-callout-title { color: rgba(255, 255, 255, .65); }
+
+/* ---------- Quadrant chart ---------- */
+.quadrant-chart {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  background: var(--white);
+  border: 1px solid var(--navy-12);
+  border-radius: var(--r);
+  padding: 40px;
+}
+.quadrant-chart::before,
+.quadrant-chart::after {
+  content: '';
+  position: absolute;
+  background: var(--navy-20);
+  z-index: 1;
+}
+.quadrant-chart::before {
+  left: 50%;
+  top: 8%;
+  bottom: 8%;
+  width: 1px;
+}
+.quadrant-chart::after {
+  top: 50%;
+  left: 8%;
+  right: 8%;
+  height: 1px;
+}
+.quadrant-label {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gray-blue);
+  z-index: 2;
+}
+.quadrant-label.tl { top: 16px; left: 16px; }
+.quadrant-label.tr { top: 16px; right: 16px; }
+.quadrant-label.bl { bottom: 16px; left: 16px; }
+.quadrant-label.br { bottom: 16px; right: 16px; }
+
+.quadrant-axis-label {
+  position: absolute;
+  font-family: var(--font-body);
+  font-size: 11px;
+  color: var(--navy-40);
+  letter-spacing: .04em;
+}
+.quadrant-axis-label.x { bottom: -24px; left: 50%; transform: translateX(-50%); }
+.quadrant-axis-label.y {
+  top: 50%;
+  left: -28px;
+  transform: translateY(-50%) rotate(-90deg);
+  transform-origin: center;
+}
+
+.quadrant-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--navy);
+  opacity: .65;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  transition: opacity .2s, transform .2s;
+}
+.quadrant-bubble:hover { opacity: .9; transform: translate(-50%, -50%) scale(1.06); }
+.quadrant-bubble--alt { background: var(--gray-blue); }
+.quadrant-bubble--accent { background: var(--beige); border: 1.5px solid var(--gray-blue); }
+
+/* ===========================================================================
+   Fase 2 lite. Componentes nuevos para skills V2 de pricing y portfolio.
+   Anadido 2026-05-27 tras auditoria contra las 18 skills V2.
+   =========================================================================== */
+
+/* ---------- Imb-bar (price index, comparativos horizontales) ----------
+   Wrapper de barras horizontales con label + track + value. Pensado para
+   price index (base 100), comparativos simples, cualquier ranking.
+   Las variantes de fill --alt/--accent/--neutral cubren los roles
+   semanticos sin tener que escribir colores inline. */
+.imb-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 0;
+}
+.imb-bar-row {
+  display: grid;
+  grid-template-columns: 140px 1fr 64px;
+  align-items: center;
+  gap: 14px;
+  font-family: var(--font-body);
+  font-size: 13px;
+}
+.imb-bar-label {
+  color: var(--navy-80);
+  font-weight: 500;
+  text-align: right;
+  letter-spacing: .02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.imb-bar-track {
+  position: relative;
+  height: 16px;
+  background: var(--navy-06);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.imb-bar-fill {
+  height: 100%;
+  background: var(--chart-series-1);
+  transition: width .25s ease;
+}
+.imb-bar-fill--alt { background: var(--chart-series-2); }
+.imb-bar-fill--accent { background: var(--chart-series-accent); }
+.imb-bar-fill--neutral { background: var(--chart-series-neutral); }
+.imb-bar-value {
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--navy);
+  font-weight: 500;
+  text-align: right;
+}
+.imb-bar-baseline {
+  position: absolute;
+  top: -4px;
+  bottom: -4px;
+  width: 1px;
+  background: var(--chart-axis);
+  pointer-events: none;
+}
+
+/* ---------- Imb-heatmap ----------
+   Wrapper de heatmap. La grilla se construye con <rect> dentro del <svg>
+   interior, con clase .imb-heatmap-cell para hover y stroke uniforme.
+   Variante de leyenda secuencial (--low a --high) o divergente (neg/mid/pos). */
+.imb-heatmap {
+  background: var(--white);
+  border: 1px solid var(--navy-12);
+  border-radius: var(--r);
+  padding: 18px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--navy-60);
+}
+.imb-heatmap > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.imb-heatmap rect.imb-heatmap-cell {
+  stroke: var(--white);
+  stroke-width: 1.5;
+  cursor: pointer;
+  transition: opacity .15s ease;
+}
+.imb-heatmap rect.imb-heatmap-cell:hover { opacity: .8; }
+.imb-heatmap-axis text {
+  fill: var(--chart-label);
+  font-size: 11px;
+  letter-spacing: .02em;
+}
+.imb-heatmap-legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 11px;
+  color: var(--navy-60);
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+.imb-heatmap-legend-bar {
+  flex: 0 0 160px;
+  height: 8px;
+  background: linear-gradient(to right, var(--chart-heatmap-low), var(--chart-heatmap-high));
+  border-radius: 2px;
+}
+.imb-heatmap-legend-bar--diverging {
+  background: linear-gradient(to right,
+    var(--chart-heatmap-diverging-neg),
+    var(--chart-heatmap-diverging-mid),
+    var(--chart-heatmap-diverging-pos));
+}
+
+/* ---------- Imb-scatter ----------
+   Contenedor de scatter plot rectangular sin cuadrantes (para algo con
+   cuadrantes ya existe .quadrant-chart). El punto es un <circle> con
+   clase .imb-scatter-point. Linea de tendencia opcional con .imb-scatter-trend. */
+.imb-scatter {
+  position: relative;
+  background: var(--white);
+  border: 1px solid var(--navy-12);
+  border-radius: var(--r);
+  padding: 24px;
+}
+.imb-scatter > svg { display: block; width: 100%; height: auto; overflow: visible; }
+.imb-scatter-point {
+  fill: var(--chart-series-1);
+  fill-opacity: .7;
+  stroke: var(--white);
+  stroke-width: 1;
+  cursor: pointer;
+  transition: fill-opacity .15s ease;
+}
+.imb-scatter-point:hover { fill-opacity: 1; }
+.imb-scatter-trend {
+  stroke: var(--chart-trend);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 4;
+  fill: none;
+}
+
+/* ---------- Imb-pill ----------
+   Etiqueta inline mas pequena y casual que .imb-badge, sin variantes de
+   estado (success/warn/danger). Pensada para tags de material, formato,
+   categoria, donde lo importante es nombrar, no senalizar urgencia. */
+.imb-pill {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 10px;
+  background: var(--navy-06);
+  color: var(--navy-60);
+  line-height: 1.4;
+}
+.imb-pill--accent { background: rgba(199, 122, 78, .12); color: #8C4E2A; }
+.imb-pill--alt { background: rgba(111, 133, 156, .14); color: var(--gray-blue); }
+.imb-pill--neutral { background: rgba(207, 203, 198, .55); color: var(--navy-80); }
+
+/* ---------- Notas de patrones sin clase formal ----------
+   Sankey diagram: solo se usa hoy en modelar_canibalizacion. Implementar
+     como SVG manual con paths Bezier (sin dep externa) hasta que aparezca
+     un segundo o tercer uso (cascada_rentabilidad, manufacturer_retailer_profit_split
+     probables en batch 2). Si llegan 3 usos, sumar d3-sankey al stack.
+   Sunburst: obppc. d3.hierarchy + d3.partition viene en d3 core v7, no
+     agrega dep. Documentar el patron al generar el primer HTML real.
+   Dual-axis (precio + $/L): curva_precio, obppc price-pack ladder.
+     Patron propio que se resuelve dentro de .chart-container con dos
+     escalas <g> y leyenda explicita.
+   Equal Gross Profit curve: price_monitoring. Path SVG manual usando
+     --chart-iso-curve. No requiere lib.
+   =========================================================================== */
+
+/* ---------- Print rules ---------- */
+@media print {
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  body { background: var(--white); }
+  nav,
+  .dashboard-filters,
+  .filter-tab-group,
+  .filter-dropdown,
+  .filter-search,
+  .imb-tooltip { display: none !important; }
+  .chart-container,
+  .imb-table,
+  .kpi-card { box-shadow: none; page-break-inside: avoid; }
+  .section { padding: 24px 0; }
+}

@@ -1,0 +1,115 @@
+/* ===========================================================================
+   Imberion. CSS Texturas (v2)
+   ---------------------------------------------------------------------------
+   Sistema de texturas editoriales para fondos de seccion. Las texturas (PNG)
+   viven en este mismo brain en assets/textures/ (relativo a la carpeta de
+   marca). Drive 04_MARCA/texturas/ mantiene las versiones master en caso de
+   reedicion, pero las skills referencian las del brain para generar HTML
+   autocontenido.
+
+   Las clases utilitarias (.section-paper, .section-dark-flow, etc.) aplican
+   la textura como background-image cover/center. El patron .texture-scrim
+   anade una capa de gradiente para preservar legibilidad sobre texturas con
+   contraste alto.
+
+   Fuente: rogarridoe/imberion/assets/css/imberion-textures-v2.css.
+   Owner: Rodrigo Garrido
+   Ultima actualizacion: 2026-05-27
+   =========================================================================== */
+
+:root {
+  --texture-hero-dust: url('../assets/textures/01_hero_dust_navy.png');
+  --texture-paper: url('../assets/textures/02_paper_grain_visible.png');
+  --texture-white: url('../assets/textures/03_white_editorial_grain.png');
+  --texture-signal-light: url('../assets/textures/04_directional_signal_light.png');
+  --texture-focus-paper: url('../assets/textures/05_radial_focus_paper.png');
+  --texture-dark-flow: url('../assets/textures/06_dark_editorial_flow.png');
+  --texture-dark-signal: url('../assets/textures/07_dark_signal_field.png');
+  --texture-left-panel: url('../assets/textures/08_left_panel_mist.png');
+  --texture-right-panel: url('../assets/textures/09_right_panel_mist.png');
+  --texture-data-haze: url('../assets/textures/10_gridless_data_haze.png');
+  --texture-cta-dust: url('../assets/textures/11_cta_dust_navy.png');
+}
+
+.hero, .hero-section {
+  background-image: var(--texture-hero-dust);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-paper, .bg-paper {
+  background-image: var(--texture-paper);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-white, .bg-white-textured {
+  background-color: #fff;
+  background-image: var(--texture-white);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-signal-light {
+  background-image: var(--texture-signal-light);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-focus {
+  background-image: var(--texture-focus-paper);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-dark-flow {
+  background-image: var(--texture-dark-flow);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-dark-signal {
+  background-image: var(--texture-dark-signal);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-left-panel {
+  background-image: var(--texture-left-panel);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-right-panel {
+  background-image: var(--texture-right-panel);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-data-haze {
+  background-image: var(--texture-data-haze);
+  background-size: cover;
+  background-position: center;
+}
+
+.section-cta-dust {
+  background-image: var(--texture-cta-dust);
+  background-size: cover;
+  background-position: center;
+}
+
+.texture-scrim {
+  position: relative;
+  isolation: isolate;
+}
+.texture-scrim::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(90deg, rgba(255, 255, 255, .82), rgba(255, 255, 255, .46), rgba(255, 255, 255, .78));
+}
+.texture-scrim-dark::before {
+  background: linear-gradient(90deg, rgba(10, 24, 40, .90), rgba(10, 24, 40, .62), rgba(10, 24, 40, .86));
+}

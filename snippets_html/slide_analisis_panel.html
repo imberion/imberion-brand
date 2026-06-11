@@ -1,0 +1,81 @@
+<!-- ============================================================
+     SNIPPET · slide_analisis_panel
+     ------------------------------------------------------------
+     Slide de analisis con action-title (so-what), chart a la izquierda
+     y panel derecho de 2-3 takeaways + linea "So what". Boton "volver
+     al resumen" arriba a la derecha (onclick="goTo(IDX_HUB)"), fuente
+     al pie. Usar cuando hay 2-3 mensajes secundarios (chart no necesita
+     todo el ancho). Para chart ancho (bridge, dispersion) usar
+     slide_analisis_barra.
+     Origen: deck SteerCo Hito 1 Temisa (2026-06-01).
+
+     HOVER (opcional): un takeaway con data-hl="<selector CSS>" resalta
+     los elementos del chart de su slide al pasar el mouse. Los elementos
+     resaltables llevan class="hl-t" (+ "hl-stroke" si es linea) y un
+     id/clase que el selector matchea. Pegar el <script> de wiring UNA
+     vez por deck (al final del body).
+     ============================================================ -->
+<style>
+  .back-btn { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 0.75px solid var(--imb-navy-20); color: var(--imb-navy-60); padding: 4px 9px; font-family: var(--font-sans); font-size: 9px; text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer; border-radius: 2px; transition: background 0.15s ease, color 0.15s ease; white-space: nowrap; }
+  .back-btn:hover { background: var(--imb-navy); color: var(--imb-white); border-color: var(--imb-navy); }
+  .slide-eyebrow { font-size: 9.5px; text-transform: uppercase; letter-spacing: 0.16em; color: var(--imb-slate); font-weight: 600; margin-bottom: 2mm; }
+  h1.slide-title.action { font-size: 25px; line-height: 1.16; max-width: 92%; }
+  .an-layout { display: flex; gap: 7mm; flex: 1; min-height: 0; }
+  .an-chart { flex: 1.55; display: flex; flex-direction: column; min-height: 0; justify-content: center; }
+  .an-chart svg { width: 100%; height: auto; max-height: 100%; }
+  .an-panel { flex: 1; display: flex; flex-direction: column; gap: 2.5mm; min-width: 0; }
+  .tk { display: flex; gap: 7px; padding: 2.5mm 3mm; background: var(--imb-paper-soft); border-radius: 2px; border-left: 2px solid var(--imb-slate-soft); font-size: 10.5px; line-height: 1.4; color: var(--imb-navy); cursor: default; transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease; }
+  .tk[data-hl] { cursor: pointer; }
+  .tk[data-hl]:hover, .tk.tk-on { background: rgba(198, 138, 30, 0.10); border-left-color: var(--status-yellow); box-shadow: 0 1px 6px rgba(10,24,40,.08); }
+  .tk .tk-num { flex: 0 0 auto; width: 15px; height: 15px; border-radius: 50%; background: var(--imb-navy); color: var(--imb-white); font-size: 9px; font-weight: 600; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+  .tk[data-hl]:hover .tk-num, .tk.tk-on .tk-num { background: var(--status-yellow); }
+  .tk b { font-weight: 600; }
+  .tk-sw { display: flex; gap: 7px; padding: 2.5mm 3mm; background: var(--imb-navy); color: var(--imb-white); border-radius: 2px; font-size: 10.5px; line-height: 1.4; }
+  .tk-sw .sw-tag { flex: 0 0 auto; font-size: 8.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--status-yellow); padding-top: 1px; }
+  .src-foot { font-style: italic; text-transform: none; letter-spacing: 0.02em; color: var(--imb-navy-40); }
+  /* chart genericos */
+  .ax { stroke: var(--imb-navy-20); stroke-width: 0.75; }
+  .axtick { stroke: var(--imb-navy-12); stroke-width: 0.5; }
+  .axlabel { font: 9px var(--font-sans); fill: var(--imb-navy-60); }
+  .barlbl { font: 9.5px var(--font-sans); fill: var(--imb-navy); }
+  .barval { font: 9.5px var(--font-sans); fill: var(--imb-navy); font-weight: 600; }
+  .chart-note { font: italic 9px var(--font-serif); fill: var(--imb-navy-60); }
+  /* hover */
+  .hl-t { transition: fill 0.18s ease, stroke 0.18s ease, opacity 0.18s ease; }
+  .hl-t.hl { fill: var(--status-yellow) !important; }
+  .hl-t.hl-stroke.hl { stroke: var(--status-yellow) !important; stroke-width: 2.4 !important; opacity: 1 !important; }
+</style>
+
+<div class="slide">
+  <div class="slide-header"><div class="brand-logo"></div>
+    <button class="back-btn" onclick="goTo([IDX_HUB])">‹ Volver al resumen</button></div>
+  <div class="slide-eyebrow">Diagnóstico analítico · N / M · [tema]</div>
+  <h1 class="slide-title action">[Action-title: el mensaje principal en forma de so-what, justificado por el chart]</h1>
+  <div class="slide-content">
+    <div class="an-layout">
+      <div class="an-chart">
+        <svg viewBox="0 0 480 300" role="img" aria-label="[descripción]"><!-- chart a medida; elementos resaltables con class="hl-t <id/clase>" --></svg>
+      </div>
+      <div class="an-panel">
+        <div class="tk" data-hl="[selector opcional]"><span class="tk-num">1</span><span>[secundario con su implicación]</span></div>
+        <div class="tk"><span class="tk-num">2</span><span>[secundario]</span></div>
+        <div class="tk"><span class="tk-num">3</span><span>[secundario]</span></div>
+        <div class="tk-sw"><span class="sw-tag">So what</span><span>[decisión o proyecto que dispara]</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="slide-footer"><div class="src-foot">Fuente: [fuente del dato].</div><div class="page-num">NN · NN</div></div>
+</div>
+
+<!-- Pegar UNA vez por deck, al final del <body>, para activar el hover: -->
+<!--
+<script>
+  document.querySelectorAll('.tk[data-hl]').forEach(function(tk){
+    var slide = tk.closest('.slide'); if(!slide) return;
+    var targets = []; try { targets = Array.from(slide.querySelectorAll(tk.dataset.hl)); } catch(e) {}
+    var set = function(on){ tk.classList.toggle('tk-on', on); targets.forEach(function(t){ t.classList.toggle('hl', on); }); };
+    tk.addEventListener('mouseenter', function(){ set(true); });
+    tk.addEventListener('mouseleave', function(){ set(false); });
+  });
+</script>
+-->

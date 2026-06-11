@@ -1,0 +1,282 @@
+/* ===========================================================================
+   Imberion. CSS Base
+   ---------------------------------------------------------------------------
+   Variables de marca, reset, tipografia base, layout (container, section),
+   navegacion, botones, tags, reveal animations y section dividers.
+
+   Cargar antes que cualquier otro CSS de Imberion. Requiere Google Fonts
+   (Cormorant Garamond + DM Sans) inyectado en el <head> del HTML:
+
+   <link rel="preconnect" href="https://fonts.googleapis.com"/>
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet"/>
+
+   Fuente de verdad: extraido de rogarridoe/imberion (index.html) y mantenido
+   en sync con el sitio publico.
+
+   Owner: Rodrigo Garrido
+   Ultima actualizacion: 2026-05-27
+   =========================================================================== */
+
+/* ---------- Variables de marca ---------- */
+:root {
+  /* Paleta primaria */
+  --navy: #0A1828;
+  --navy-80: rgba(10, 24, 40, .8);
+  --navy-60: rgba(10, 24, 40, .6);
+  --navy-40: rgba(10, 24, 40, .4);
+  --navy-20: rgba(10, 24, 40, .2);
+  --navy-12: rgba(10, 24, 40, .12);
+  --navy-06: rgba(10, 24, 40, .06);
+
+  /* Paleta secundaria y acentos */
+  --gray-blue: #6F859C;
+  --beige: #CFCBC6;
+  --beige-dark: rgba(207, 203, 198, .6);
+  --white: #fff;
+
+  /* Layout */
+  --max: 1140px;
+  --r: 4px;
+
+  /* Tipografia */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace;
+
+  /* Logo inline (SVG base64). Para uso en backgrounds vi a CSS var,
+     ej. .slide-mark { background-image: var(--logo); }
+     En contextos oscuros, aplicar filter: invert(1) brightness(1.15). */
+  --logo: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+Cjxzdmcgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDQwMCA4NSIgdmVyc2lvbj0iMS4xIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWw6c3BhY2U9InByZXNlcnZlIiB4bWxuczpzZXJpZj0iaHR0cDovL3d3dy5zZXJpZi5jb20vIiBzdHlsZT0iZmlsbC1ydWxlOmV2ZW5vZGQ7Y2xpcC1ydWxlOmV2ZW5vZGQ7c3Ryb2tlLWxpbmVqb2luOnJvdW5kO3N0cm9rZS1taXRlcmxpbWl0OjI7Ij4KICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDAuNDE0NTA4LDAsMCwwLjQxNDUwOCwyMC42MTYzLDQ0Ljc3MjcpIj4KICAgICAgICA8dGV4dCB4PSIwcHgiIHk9IjBweCIgc3R5bGU9ImZvbnQtZmFtaWx5OidHZW9yZ2lhJywgc2VyaWY7Zm9udC1zaXplOjE1MHB4O2ZpbGw6cmdiKDI4LDQzLDU2KTsiPkk8dHNwYW4geD0iNjcuNDQ3cHggMjE1LjUzNHB4IDMyMi42MDVweCA0MjkuNjA0cHggNTQzLjg1M3B4ICIgeT0iMHB4IDBweCAwcHggMHB4IDBweCAiPk1CRVJJPC90c3Bhbj48L3RleHQ+CiAgICA8L2c+CiAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgwLjQxNDUwOCwwLDAsMC40MTQ1MDgsLTE1Mi45NTMsLTQ0LjM1MjMpIj4KICAgICAgICA8cGF0aCBkPSJNMTA5MiwxMDdDMTEyNC4wMSwxMDcgMTE1MCwxMzIuOTg5IDExNTAsMTY1QzExNTAsMTk3LjAxMSAxMTI0LjAxLDIyMyAxMDkyLDIyM0MxMDU5Ljk5LDIyMyAxMDM0LDE5Ny4wMTEgMTAzNCwxNjVDMTAzNCwxMzIuOTg5IDEwNTkuOTksMTA3IDEwOTIsMTA3Wk0xMDQ5LjU2LDE2OS45MDlDMTA0OS41NSwxNzMuNzY0IDEwNDkuNDYsMTcyLjk0NyAxMDQ5LjU1LDE3My4wODhDMTA1MS43NSwxNzYuNTQ3IDEwNTQuOTMsMTYxLjMxIDEwNTQuNTIsMTY0LjMxMkMxMDU0LjQxLDE2NS4xMjIgMTA1NS4zNywxNjIuMjM2IDEwNTYuMTgsMTYwLjAzNEMxMDU3LjY5LDE1NS45NjkgMTA2MS40MSwxNTQuMjY2IDEwNjMuNjgsMTUyLjk5MkMxMDY4LjE2LDE1MC40NzkgMTA3Mi40NCwxNTAuMDgyIDEwNzQuOTYsMTUxLjIwNUMxMDc4LjAxLDE1Mi41NjUgMTA3OS4xMiwxNTMuODc5IDEwODAuODUsMTU1LjA0NUMxMDgyLjU3LDE1Ni4yMTEgMTA4NC42MywxNTcuNzg2IDEwODUuNzMsMTU5Ljk1NUMxMDg2LjgyLDE2Mi4xMjQgMTA4Ny45NSwxNjMuMjE5IDEwODkuMiwxNjYuMjM2QzEwOTAuNzYsMTY5LjYzMSAxMDkxLjkzLDE3MC45NzggMTA5My42NiwxNzMuMjc0QzEwOTUuMzgsMTc1LjU3IDEwOTguNjgsMTc4Ljc5NiAxMTAxLjM1LDE3OS45NjNDMTEwNC4wMiwxODEuMTMxIDExMDYuODcsMTgxLjcyNCAxMTExLjE3LDE4MS43MzNDMTExNi41MSwxODEuNzQ1IDExMjAuOTQsMTgwLjk1MyAxMTI0LjQ1LDE3OS4zNTlDMTEyNy45NiwxNzcuNzY1IDExMzAuNjQsMTc1LjU3MyAxMTMyLjQ4LDE3Mi43ODJDMTEzMy4xNCwxNzEuNzcgMTEzMy42NywxNzAuNzA0IDExMzQuMTUsMTY5LjU5NkMxMTM0Ljk4LDE2Ny42NDkgMTEzNS42NSwxNjUuNTY1IDExMzUuMywxNjQuMDk1QzExMzQuMzEsMTU5Ljg5NiAxMTMwLjEyLDE2OC4zMjcgMTEyOC40MiwxNjkuODYyQzExMjYuMDMsMTcyLjAyMyAxMTIzLjI1LDE3NC4xNDIgMTEyMS4yMSwxNzUuMjk5QzExMTkuMTYsMTc2LjQ1NyAxMTE2LjQsMTc3LjM2NSAxMTEyLjg0LDE3Ny4zNTdDMTEwOS45LDE3Ny4zNTEgMTEwNy41LDE3Ni44OTQgMTEwNS44OCwxNzYuMDExQzExMDQuMjYsMTc1LjEyOSAxMTAyLjI0LDE3NC42ODggMTEwMS4xNCwxNzIuOTI3QzExMDAuMDQsMTcxLjE2NiAxMDk2LjUsMTY4LjAxNSAxMDk1LjI1LDE2NS40MzdDMTA5My41OCwxNjEuNzI4IDEwOTIuNjIsMTYxLjY1NSAxMDkxLjMsMTU4LjE5NkMxMDkwLjEsMTU1LjA0NCAxMDg4LjE3LDE1Mi4yMzEgMTA4NS40NCwxNTAuNzE4QzEwODIuNzIsMTQ5LjIwNSAxMDc5LjcxLDE0NS40OSAxMDc0Ljc5LDE0NS40OEMxMDY3LjE0LDE0NS40NjMgMTA2MC4yNywxNDUuNjczIDEwNTcuMywxNTAuODExQzEwNTYuMTcsMTUyLjc3NCAxMDU1LjM2LDE1Mi43MzYgMTA1NC41MywxNTQuNzA0QzEwNTMuMzQsMTU3LjU1OCAxMDQ5LjU3LDE2Ni41NjQgMTA0OS41NiwxNjkuOTA5WiIgc3R5bGU9ImZpbGw6cmdiKDI4LDQzLDU2KTsiLz4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDAuNDE0NTA4LDAsMCwwLjQxNDUwOCwzMjkuNTM0LDQ0LjM1MjMpIj4KICAgICAgICA8dGV4dCB4PSIwcHgiIHk9IjBweCIgc3R5bGU9ImZvbnQtZmFtaWx5OidHZW9yZ2lhJywgc2VyaWY7Zm9udC1zaXplOjE1MHB4O2ZpbGw6cmdiKDI4LDQzLDU2KTsiPk48L3RleHQ+CiAgICA8L2c+CiAgICA8ZyB0cmFuc2Zvcm09Im1hdHJpeCgwLjQxNDUwOCwwLDAsMC4yNzYzMzksLTM3LjMwNTcsLTE3LjU0NzUpIj4KICAgICAgICA8cGF0aCBkPSJNMjA1LDMzMy41QzIwNSwzMzQuMzI4IDIwNC41NTIsMzM1IDIwNCwzMzVMOTEsMzM1QzkwLjQ0OCwzMzUgOTAsMzM0LjMyOCA5MCwzMzMuNUM5MCwzMzIuNjcyIDkwLjQ0OCwzMzIgOTEsMzMyTDIwNCwzMzJDMjA0LjU1MiwzMzIgMjA1LDMzMi42NzIgMjA1LDMzMy41WiIgc3R5bGU9ImZpbGw6cmdiKDI4LDQzLDU2KTsiLz4KICAgIDwvZz4KICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDAuNDE0NTA4LDAsMCwwLjI3NjMzOSwtMjI1LjkwNywtMTcuNTQ3NSkiPgogICAgICAgIDxwYXRoIGQ9Ik0xNTEwLDMzMy41QzE1MTAsMzM0LjMyOCAxNTA5LjU1LDMzNSAxNTA5LDMzNUwxMzk2LDMzNUMxMzk1LjQ1LDMzNSAxMzk1LDMzNC4zMjggMTM5NSwzMzMuNUMxMzk1LDMzMi42NzIgMTM5NS40NSwzMzIgMTM5NiwzMzJMMTUwOSwzMzJDMTUwOS41NSwzMzIgMTUxMCwzMzIuNjcyIDE1MTAsMzMzLjVaIiBzdHlsZT0iZmlsbDpyZ2IoMjgsNDMsNTYpOyIvPgogICAgPC9nPgogICAgPGcgdHJhbnNmb3JtPSJtYXRyaXgoMC40OTM1MzIsMCwwLDAuNDE0NTA4LDIwMC41NDgsODAuMzQzOCkiPgogICAgICAgIDxnIHRyYW5zZm9ybT0ibWF0cml4KDQ4LDAsMCw0OCwyODEuMDYyLDApIj4KICAgICAgICA8L2c+CiAgICAgICAgPHRleHQgeD0iLTI4MS4wNjJweCIgeT0iMHB4IiBzdHlsZT0iZm9udC1mYW1pbHk6J0hlbHZldGljYSc7Zm9udC1zaXplOjQ4cHg7ZmlsbDpyZ2IoMjgsNDMsNTYpOyI+Zjx0c3BhbiB4PSItMjYwLjA0NnB4IC0yMzYuMzgxcHggLTIwMi4wMDZweCAtMTU0LjM0MnB4IC0xMzMuMzI2cHggLTk4Ljk1cHggLTY0LjU3NXB4IC00Ni4yMzFweCAtMTQuNTUxcHggMTkuODI0cHggNDAuODRweCA2MS44NTZweCA5Ni4yMzJweCAxMTcuMjQ4cHggMTQ4LjkyOHB4IDE2Ny4yNzJweCAyMDEuNjQ3cHggMjM2LjAyMnB4IDI3MC4zOThweCAiIHk9IjBweCAwcHggMHB4IDBweCAwcHggMHB4IDBweCAwcHggMHB4IDBweCAwcHggMHB4IDBweCAwcHggMHB4IDBweCAwcHggMHB4IDBweCAiPnJvbSBub2lzZSB0byBzaWduYWw8L3RzcGFuPjwvdGV4dD4KICAgIDwvZz4KPC9zdmc+Cg==');
+}
+
+/* ---------- Reset minimo ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--beige);
+  color: var(--navy);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ---------- Layout: container y section ---------- */
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 0 36px;
+}
+
+.section { padding: 96px 0; }
+.section--dark { background: var(--navy); color: var(--white); }
+.section--dark h1,
+.section--dark h2,
+.section--dark h3,
+.section--dark h4 { color: var(--white); }
+.section--tint { background: var(--beige); }
+
+/* ---------- Tipografia ---------- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  line-height: 1.12;
+  font-weight: 400;
+  color: var(--navy);
+}
+h1 { font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 300; }
+h2 { font-size: clamp(2.1rem, 4vw, 3.2rem); }
+h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); }
+h4 { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
+
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gray-blue);
+  margin-bottom: 14px;
+}
+.section--dark .eyebrow { color: rgba(143, 163, 184, .65); }
+
+.lead {
+  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+  color: var(--navy-60);
+  max-width: 620px;
+  line-height: 1.7;
+}
+.section--dark .lead { color: rgba(255, 255, 255, .6); }
+
+/* ---------- Navegacion ---------- */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255, 255, 255, .08);
+  padding: 0 36px;
+  transition: border-bottom-color .22s cubic-bezier(.4, 0, .2, 1),
+              box-shadow .22s cubic-bezier(.4, 0, .2, 1);
+}
+nav.imb-elevated {
+  border-bottom-color: rgba(255, 255, 255, .18);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, .26);
+}
+.nav-inner {
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+}
+.nav-logo img { height: 36px; width: auto; }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a:not(.btn):not(.lang-btn) {
+  color: rgba(255, 255, 255, .65);
+  font-size: 14px;
+  font-weight: 500;
+  transition: color .2s;
+}
+.nav-links a:not(.btn):not(.lang-btn):hover { color: #fff; }
+.nav-links a.imb-active:not(.btn):not(.lang-btn) { color: #fff !important; }
+.nav-right { display: flex; gap: 14px; align-items: center; }
+
+.lang-toggle {
+  display: flex;
+  gap: 2px;
+  background: rgba(255, 255, 255, .08);
+  border-radius: var(--r);
+  padding: 3px;
+}
+.lang-btn {
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 5px 10px;
+  border-radius: 2px;
+  cursor: pointer;
+  color: rgba(255, 255, 255, .4);
+  transition: all .18s;
+  border: none;
+  background: transparent;
+}
+.lang-btn.active { background: rgba(255, 255, 255, .15); color: #fff; }
+.lang-btn:hover:not(.active) { color: rgba(255, 255, 255, .7); }
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 22px;
+  border-radius: var(--r);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: all .2s;
+}
+.btn-primary { background: var(--white); color: var(--navy); }
+.btn-primary:hover { background: var(--beige); }
+
+.btn-outline {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, .22);
+  color: rgba(255, 255, 255, .8);
+}
+.btn-outline:hover {
+  border-color: rgba(255, 255, 255, .55);
+  background: rgba(255, 255, 255, .05);
+}
+
+.btn-signal {
+  background: var(--navy);
+  color: #fff;
+  padding: 14px 32px;
+  font-size: 15px;
+  border: 1.5px solid rgba(255, 255, 255, .3);
+}
+.btn-signal:hover { background: rgba(15, 42, 63, .85); }
+
+.inline-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray-blue);
+  letter-spacing: .04em;
+  transition: opacity .2s;
+}
+.inline-cta:hover { opacity: .7; }
+.inline-cta.white { color: rgba(255, 255, 255, .7); }
+.inline-cta.white:hover { color: #fff; opacity: 1; }
+
+/* ---------- Tags ---------- */
+.tag {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .06em;
+  padding: 4px 10px;
+  border-radius: 2px;
+  background: var(--navy-06);
+  color: var(--navy-60);
+}
+.tag-light { background: rgba(255, 255, 255, .12); color: rgba(255, 255, 255, .8); }
+
+/* ---------- Reveal animations ---------- */
+.imb-reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity .42s cubic-bezier(.2, .8, .2, 1),
+              transform .42s cubic-bezier(.2, .8, .2, 1);
+}
+.imb-reveal.imb-in { opacity: 1; transform: none; }
+.imb-reveal[data-d="1"] { transition-delay: .07s; }
+.imb-reveal[data-d="2"] { transition-delay: .14s; }
+.imb-reveal[data-d="3"] { transition-delay: .21s; }
+.imb-reveal[data-d="4"] { transition-delay: .28s; }
+.imb-reveal[data-d="5"] { transition-delay: .35s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .imb-reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- Section dividers ----------
+   La textura diagonal vive en assets/textures/04_diagonal_section_divider.png.
+   En el brain, las texturas se cargan via imberion_textures.css. */
+.imb-divider {
+  display: block;
+  width: 100%;
+  height: 90px;
+  background: url('../assets/textures/04_diagonal_section_divider.png') center/cover no-repeat;
+  font-size: 0;
+  line-height: 0;
+}
+.imb-divider--flip { transform: scaleY(-1); }
+
+/* ---------- Responsive base ---------- */
+@media (max-width: 600px) {
+  .container { padding: 0 20px; }
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+}
