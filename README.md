@@ -11,6 +11,7 @@ Material propietario de Imberion. Público para servirse vía CDN y para colabor
 - `logos_svg/` Logos en SVG (con y sin tagline, navy y blanco) y favicons.
 - `iconos/` 18 iconos editoriales de línea propia (trazo 1.25px, navy). Ver `iconos/_referencia.html`.
 - `snippets_html/` Bloques HTML reutilizables. El principal es `plantilla_deck.html`, el chasis estándar de decks (16:9, autocontenido, CSS y logos embebidos).
+- `js/` Componentes JavaScript de marca. El principal es `imberion_tour.js` (tour guiado: welcome modal + spotlight + tooltip), pareja de `css/imberion_tour.css`.
 
 ## Cómo se usa: cargar el CSS vía CDN
 
@@ -44,6 +45,40 @@ Las texturas se resuelven solas: `imberion_textures.css` las referencia con ruta
 ```
 https://cdn.jsdelivr.net/gh/rogarridoe/imberion-brand@v1.0.0/css/imberion_base.css
 ```
+
+## Tour guiado (welcome modal + spotlight + tooltip)
+
+Componente estándar para onboardear al lector de un entregable interactivo (cómo navegar pestañas, qué significan los marcadores, dónde está cada cosa). Vanilla, sin dependencias, con botón flotante `?` para reabrirlo y memoria por navegador (`localStorage`). Diseño alineado al tour del portal.
+
+Cargar el CSS y el JS (después del contenido de la página), y llamar `ImberionTour.init`:
+
+```html
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/rogarridoe/imberion-brand@main/css/imberion_tour.css"/>
+<script src="https://cdn.jsdelivr.net/gh/rogarridoe/imberion-brand@main/js/imberion_tour.js"></script>
+<script>
+  ImberionTour.init({
+    tourId: 'temisa-asis',            // clave de localStorage (requerido, único por documento)
+    reactivarDias: 45,                // opcional: re-arranca solo tras N días sin entrar
+    welcome: {
+      eyebrow: 'Guía rápida',
+      titulo: 'Cómo leer este documento',
+      texto: 'Un recorrido de 30 segundos para sacarle provecho.'
+    },
+    pasos: [
+      { element: '#tabs', title: 'Cinco pestañas', description: 'Cada pestaña es un proceso.', side: 'bottom' },
+      { element: '.tab.hall', title: 'Hallazgos es una pestaña', description: 'No es un encabezado: es clickeable.' },
+      { element: '#diagwrap', title: 'El flujo de hoy', description: 'Las cajas en acento son oportunidades.', side: 'top' }
+    ]
+  });
+</script>
+```
+
+Notas:
+- Un paso sin `element` se muestra centrado (mensaje intermedio); los pasos cuyo selector no existe en la página se omiten solos.
+- `side`: `'top'` | `'bottom'` | `'auto'` (default). El tooltip se reposiciona solo si no cabe.
+- `alMostrar` (función opcional por paso) corre antes de iluminar el paso, p. ej. para cambiar de pestaña: `alMostrar: function () { show('captacion'); }`.
+- Re-activar a mano: el botón `?` reabre el welcome; `ImberionTour.reset()` borra el "visto" para que arranque solo en la próxima carga.
+- Para un entregable autocontenido (deck que se manda por correo), pegar `imberion_tour.css` y `imberion_tour.js` inline en vez de cargarlos del CDN.
 
 ## Uso local (sin CDN)
 
