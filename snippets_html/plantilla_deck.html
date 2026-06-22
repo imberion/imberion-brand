@@ -1168,7 +1168,7 @@
 </div>
 <button class="nav-arrow prev" onclick="goPrev()" aria-label="Anterior">‹</button>
 <button class="nav-arrow next" onclick="goNext()" aria-label="Siguiente">›</button>
-<div class="nav-hint">← → para navegar · Esc para cambiar modo</div>
+<div class="nav-hint">← → para navegar · nº + Enter para ir a una slide · Esc para cambiar modo</div>
 
 <div class="slide cover">
   <div class="slide-header"><div class="brand-logo white"></div>
@@ -1352,6 +1352,25 @@
     } else if (e.key === 'f' || e.key === 'F') {
       toggleFullscreen();
       e.preventDefault();
+    }
+  });
+
+  // Ir a una slide escribiendo su número + Enter (p. ej. "12" + Enter). Soporta multidígito.
+  let slideNumBuffer = '', slideNumTimer = null;
+  document.addEventListener('keydown', (e) => {
+    if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+    if (/^[0-9]$/.test(e.key)) {
+      slideNumBuffer += e.key;
+      clearTimeout(slideNumTimer);
+      slideNumTimer = setTimeout(() => { slideNumBuffer = ''; }, 1500);
+      e.preventDefault();
+    } else if (e.key === 'Enter' && slideNumBuffer) {
+      const n = parseInt(slideNumBuffer, 10);
+      slideNumBuffer = ''; clearTimeout(slideNumTimer);
+      if (n >= 1 && n <= total) goTo(n - 1);
+      e.preventDefault();
+    } else if (e.key !== 'Enter') {
+      slideNumBuffer = ''; clearTimeout(slideNumTimer);
     }
   });
 
