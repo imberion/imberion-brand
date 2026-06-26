@@ -15,7 +15,7 @@
    en sync con el sitio publico.
 
    Owner: Rodrigo Garrido
-   Ultima actualizacion: 2026-05-27
+   Ultima actualizacion: 2026-06-26 (accents petroleo + ochre formalizados)
    =========================================================================== */
 
 /* ---------- Variables de marca ---------- */
@@ -34,6 +34,19 @@
   --beige: #CFCBC6;
   --beige-dark: rgba(207, 203, 198, .6);
   --white: #fff;
+
+  /* Acentos de marca (formalizados 2026-06) */
+  /* Petroleo. Accent primario: frio, tecnico, premium. La "senal". */
+  --petrol:        #1C5F6B;  /* base. CTAs, highlight, linea protagonista */
+  --petrol-deep:   #11454E;  /* texto/iconos sobre claro (AA en papel) */
+  --petrol-bright: #52A0AC;  /* sobre navy. lineas, KPI, estado activo */
+  --petrol-12:     rgba(28, 95, 107, .12);  /* fills callout/pill en claro */
+  --petrol-06:     rgba(28, 95, 107, .06);  /* washes, hover */
+  /* Ochre. Accent secundario, rol de datos. */
+  --ochre:         #A88A3A;
+  --ochre-deep:    #7E641F;
+  --ochre-bright:  #C7A85A;
+  --ochre-12:      rgba(168, 138, 58, .14);
 
   /* Layout */
   --max: 1140px;
@@ -198,6 +211,9 @@ nav.imb-elevated {
 .btn-primary { background: var(--white); color: var(--navy); }
 .btn-primary:hover { background: var(--beige); }
 
+.btn-accent { background: var(--petrol); color: #fff; }
+.btn-accent:hover { background: var(--petrol-deep); }
+
 .btn-outline {
   background: transparent;
   border: 1.5px solid rgba(255, 255, 255, .22);
@@ -230,6 +246,7 @@ nav.imb-elevated {
 .inline-cta:hover { opacity: .7; }
 .inline-cta.white { color: rgba(255, 255, 255, .7); }
 .inline-cta.white:hover { color: #fff; opacity: 1; }
+.inline-cta--accent { color: var(--petrol-deep); }
 
 /* ---------- Tags ---------- */
 .tag {
@@ -242,6 +259,7 @@ nav.imb-elevated {
   color: var(--navy-60);
 }
 .tag-light { background: rgba(255, 255, 255, .12); color: rgba(255, 255, 255, .8); }
+.tag--accent { background: var(--petrol-12); color: var(--petrol-deep); }
 
 /* ---------- Reveal animations ---------- */
 .imb-reveal {

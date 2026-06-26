@@ -10,7 +10,7 @@
    aqui para el uso de skills analiticas.
 
    Owner: Rodrigo Garrido
-   Ultima actualizacion: 2026-05-27
+   Ultima actualizacion: 2026-06-26 (chart-series-accent = petroleo; +accent-2 ochre)
    =========================================================================== */
 
 /* ---------- Layout de dashboard ---------- */
@@ -184,7 +184,8 @@
   /* Roles semanticos sobre la paleta de series. Distintos de series-1..6
      porque tienen semantica fija: el accent siempre destaca, el neutral
      siempre marca subtotales o totales. */
-  --chart-series-accent: #C77A4E;
+  --chart-series-accent: var(--petrol);    /* el highlight = la senal */
+  --chart-series-accent-2: var(--ochre);   /* 2a serie categorica / contraste de datos */
   --chart-series-neutral: var(--navy-40);
 
   /* Bandas, corredores y referencias dentro del area de chart */
@@ -532,6 +533,7 @@
 }
 .imb-bar-fill--alt { background: var(--chart-series-2); }
 .imb-bar-fill--accent { background: var(--chart-series-accent); }
+.imb-bar-fill--accent-2 { background: var(--chart-series-accent-2); }
 .imb-bar-fill--neutral { background: var(--chart-series-neutral); }
 .imb-bar-value {
   font-variant-numeric: lining-nums tabular-nums;
@@ -642,7 +644,7 @@
   color: var(--navy-60);
   line-height: 1.4;
 }
-.imb-pill--accent { background: rgba(199, 122, 78, .12); color: #8C4E2A; }
+.imb-pill--accent { background: var(--petrol-12); color: var(--petrol-deep); }
 .imb-pill--alt { background: rgba(111, 133, 156, .14); color: var(--gray-blue); }
 .imb-pill--neutral { background: rgba(207, 203, 198, .55); color: var(--navy-80); }
 
