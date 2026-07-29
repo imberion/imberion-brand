@@ -19,12 +19,14 @@
   --imb-tour-navy-12: var(--navy-12, rgba(10, 24, 40, .12));
   --imb-tour-navy-06: var(--navy-06, rgba(10, 24, 40, .06));
   --imb-tour-grayblue: var(--gray-blue, #6F859C);
-  --imb-tour-paper: var(--paper, #F6F4F0);
+  --imb-tour-paper: var(--cream, #F6F4F0);
   --imb-tour-white: var(--white, #fff);
   --imb-tour-font-display: var(--font-display, 'Cormorant Garamond', Georgia, serif);
   --imb-tour-font-body: var(--font-body, 'DM Sans', system-ui, -apple-system, sans-serif);
   /* Punto de progreso activo y acentos opcionales. Default = navy (neutro). */
   --imb-tour-accent: var(--navy, #0A1828);
+  --imb-tour-navy-hover: color-mix(in srgb, var(--imb-tour-navy) 88%, var(--imb-tour-white));
+  --imb-tour-focus: var(--focus-ring, #52A0AC);
   --imb-tour-overlay: rgba(10, 24, 40, .74);
 }
 
@@ -48,8 +50,8 @@
   box-shadow: 0 10px 26px rgba(10, 24, 40, .34);
   transition: transform .15s ease, background .15s ease;
 }
-.imb-tour-fab:hover { transform: translateY(-2px); background: #13283f; }
-.imb-tour-fab:focus-visible { outline: 2px solid var(--imb-tour-grayblue); outline-offset: 2px; }
+.imb-tour-fab:hover { transform: translateY(-2px); background: var(--imb-tour-navy-hover); }
+.imb-tour-fab:focus-visible { outline: 2px solid var(--imb-tour-focus); outline-offset: 2px; }
 
 /* --- Welcome modal -------------------------------------------------------- */
 .imb-tour-welcome {
@@ -67,13 +69,13 @@
   background: var(--imb-tour-white);
   width: 100%;
   max-width: 450px;
-  border-radius: 15px;
+  border-radius: 8px;
   padding: 30px 34px 26px;
   box-shadow: 0 30px 72px rgba(10, 24, 40, .42);
 }
 .imb-tour-welcome .imb-tour-eyebrow {
   font-family: var(--imb-tour-font-body);
-  font-size: 11px;
+  font-size: var(--text-2xs, 11px);
   letter-spacing: .18em;
   text-transform: uppercase;
   font-weight: 700;
@@ -82,13 +84,13 @@
 .imb-tour-welcome h3 {
   font-family: var(--imb-tour-font-display);
   font-weight: 400;
-  font-size: 30px;
+  font-size: 1.75rem;
   margin: 5px 0 8px;
   color: var(--imb-tour-navy);
 }
 .imb-tour-welcome p {
   font-family: var(--imb-tour-font-body);
-  font-size: 14px;
+  font-size: var(--text-md, 14px);
   line-height: 1.6;
   color: var(--imb-tour-navy-60);
   margin: 0 0 20px;
@@ -96,7 +98,7 @@
 .imb-tour-welcome .imb-tour-wbtns { display: flex; gap: 9px; }
 .imb-tour-welcome .imb-tour-note {
   font-family: var(--imb-tour-font-body);
-  font-size: 11.5px;
+  font-size: var(--text-2xs, 11px);
   color: var(--imb-tour-navy-60);
   margin-top: 15px;
 }
@@ -109,6 +111,7 @@
   border-radius: 8px;
   box-shadow: 0 0 0 9999px var(--imb-tour-overlay);
   pointer-events: none;
+  /* impeccable-disable-next-line layout-transition -- el recorte lo hace el box-shadow de 9999px: con transform el anillo se deforma */
   transition: top .25s, left .25s, width .25s, height .25s;
 }
 
@@ -120,13 +123,13 @@
   max-width: calc(100vw - 24px);
   background: var(--imb-tour-white);
   border: 1px solid var(--imb-tour-navy-12);
-  border-radius: 11px;
+  border-radius: 8px;
   box-shadow: 0 20px 54px rgba(10, 24, 40, .3);
   padding: 17px 19px;
   font-family: var(--imb-tour-font-body);
 }
 .imb-tour-tip .imb-tour-num {
-  font-size: 10.5px;
+  font-size: var(--text-2xs, 11px);
   letter-spacing: .16em;
   text-transform: uppercase;
   color: var(--imb-tour-grayblue);
@@ -136,13 +139,13 @@
 .imb-tour-tip h4 {
   font-family: var(--imb-tour-font-body);
   font-weight: 600;
-  font-size: 15.5px;
+  font-size: var(--text-base, 15px);
   margin: 0 0 6px;
   color: var(--imb-tour-navy);
 }
 .imb-tour-tip p {
   margin: 0 0 14px;
-  font-size: 13.5px;
+  font-size: var(--text-sm, 13px);
   line-height: 1.55;
   color: var(--imb-tour-navy-60);
 }
@@ -165,10 +168,10 @@
 /* --- Botones (welcome y tooltip comparten) -------------------------------- */
 .imb-tour-b {
   font-family: var(--imb-tour-font-body);
-  font-size: 12.5px;
+  font-size: var(--text-sm, 13px);
   font-weight: 600;
   padding: 7px 13px;
-  border-radius: 7px;
+  border-radius: var(--r, 4px);
   cursor: pointer;
   border: 1px solid var(--imb-tour-navy-12);
   background: var(--imb-tour-white);
@@ -177,9 +180,9 @@
 }
 .imb-tour-b:hover { background: var(--imb-tour-paper); }
 .imb-tour-b.is-primary { background: var(--imb-tour-navy); color: #fff; border-color: var(--imb-tour-navy); }
-.imb-tour-b.is-primary:hover { background: #13283f; }
+.imb-tour-b.is-primary:hover { background: var(--imb-tour-navy-hover); }
 .imb-tour-b.is-ghost { border-color: transparent; color: var(--imb-tour-navy-60); }
-.imb-tour-b:focus-visible { outline: 2px solid var(--imb-tour-grayblue); outline-offset: 2px; }
+.imb-tour-b:focus-visible { outline: 2px solid var(--imb-tour-focus); outline-offset: 2px; }
 
 /* --- Respeto a prefers-reduced-motion ------------------------------------- */
 @media (prefers-reduced-motion: reduce) {

@@ -11,7 +11,7 @@ Material propietario de Imberion. Público para servirse vía CDN y para colabor
 - `css/` Hojas de estilo canónicas (base, componentes, charts, deck, texturas).
 - `assets/textures/` Texturas editoriales de fondo en PNG. `assets/textures/lite/` son las versiones JPEG comprimidas (~900px) para embeber en decks autocontenidos.
 - `logos_svg/` Logos en SVG (con y sin tagline, navy y blanco) y favicons.
-- `iconos/` 18 iconos editoriales de línea propia (trazo 1.25px, navy). Ver `iconos/_referencia.html`. `iconos/industrias/` agrega el set por industria (retail, cpg, telco, farma, automotriz, logistics, building materials, b2b industrial, servicios b2b/b2c).
+- `iconos/` 23 iconos editoriales de línea propia (trazo 1.25px sobre lienzo de 24px, color por `currentColor`). Ver `iconos/_referencia.html`, que es la hoja de contacto de todo el set. `iconos/industrias/` agrega 10 por industria (retail, cpg, telco, farma, automotriz, logistics, building materials, b2b industrial, servicios b2b/b2c).
 - `snippets_html/` Bloques HTML reutilizables. El principal es `plantilla_deck.html`, el chasis estándar de decks (16:9, autocontenido, CSS y logos embebidos).
 - `js/` Componentes JavaScript de marca. El principal es `imberion_tour.js` (tour guiado: welcome modal + spotlight + tooltip), pareja de `css/imberion_tour.css`.
 
@@ -98,6 +98,7 @@ git clone https://github.com/rogarridoe/imberion-brand.git
 
 - Logos: SVG inline para que se embeban en el HTML, no por `<img>`. Para fondos oscuros, usar la variante blanca o aplicar `filter: invert(1)` sobre la navy.
 - Iconos: embeber el SVG inline. No importar librerías externas (Lucide, Heroicons, Feather): el set propio sostiene la identidad de línea.
+- Los iconos pintan con `currentColor`, así que heredan el color del contexto. Para ponerlos en blanco sobre navy o en acento, basta con setear `color` en el contenedor; no hace falta `filter: invert` ni un archivo por variante.
 
 ## Reglas de marca
 

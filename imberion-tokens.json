@@ -2,29 +2,41 @@
   "_meta": {
     "nombre": "Imberion design tokens",
     "owner": "Rodrigo Garrido",
-    "fuente": "Fuente de verdad de los tokens de marca. El bloque :root de imberion_base.css y de imberion_charts.css se GENERA desde aqui. No edites colores a mano en el CSS.",
+    "fuente": "Fuente de verdad de los tokens de marca. El bloque :root de imberion_base.css y de imberion_charts.css se GENERA desde aquí. No edites valores a mano en el CSS.",
     "como_cambiar": "Edita un valor en este archivo y corre: python3 00_imberion/marca/_build_tokens.py  (luego publica con _publish_kit.sh).",
-    "loop_claude_design": "Este JSON se publica al repo publico (imberion-brand) para que Claude Design lo lea y se alinee. Cuando Claude Design proponga mejoras, las devuelve como este mismo JSON; se validan, se regenera el CSS y se publica.",
-    "actualizado": "2026-07-02 (capa 'signal' anadida a semantic; propuesta de Claude Design, cero cambio de hex)"
+    "loop_claude_design": "Este JSON se publica al repo público (imberion-brand) para que Claude Design lo lea y se alinee. Cuando Claude Design proponga mejoras, las devuelve como este mismo JSON; se validan, se regenera el CSS y se publica.",
+    "convencion_claves_doc": "Las claves que empiezan con guion bajo son documentación y NO se emiten como CSS. El generador las salta.",
+    "actualizado": "2026-07-28 (escala de espacio, escala tipográfica, rampa sobre oscuro, motion y foco; cero cambio en los hex de marca)"
   },
 
   "color": {
     "navy":          { "hex": "#0A1828", "desc": "ancla de marca. Texto, superficies oscuras.",
                        "alpha": { "80": 0.8, "60": 0.6, "40": 0.4, "20": 0.2, "12": 0.12, "06": 0.06 } },
     "gray-blue":     { "hex": "#6F859C", "desc": "soporte apagado. Captions, eyebrows, UI inactiva." },
-    "beige":         { "hex": "#CFCBC6", "desc": "papel. Fondo claro calido.",
+    "slate-light":   { "hex": "#8FA3B8", "desc": "slate claro. Reglas de acento y bordes sobre navy, donde gray-blue se apaga demasiado." },
+    "beige":         { "hex": "#CFCBC6", "desc": "papel. Fondo claro cálido.",
                        "alpha": { "dark": 0.6 } },
-    "white":         { "hex": "#fff",    "desc": "blanco puro." },
+    "cream":         { "hex": "#F6F4F0", "desc": "papel claro. Superficies de chrome (nav de deck, barras fijas) donde blanco puro corta demasiado." },
+    "white":         { "hex": "#fff",    "desc": "blanco puro.",
+                       "_alpha_doc": "Rampa sobre navy. Contraste medido contra #0A1828: 92 = 12.9:1, 78 = 9.9:1, 62 = 7.0:1, 46 = 4.3:1 (solo texto grande), 30 y abajo = líneas y superficies, nunca texto.",
+                       "alpha": { "92": 0.92, "78": 0.78, "62": 0.62, "46": 0.46, "30": 0.3, "16": 0.16, "08": 0.08 } },
 
-    "petrol":        { "hex": "#1C5F6B", "desc": "accent primario. Frio, tecnico, premium. La senal.",
+    "petrol":        { "hex": "#1C5F6B", "desc": "accent primario. Frío, técnico, premium. La señal.",
                        "alpha": { "12": 0.12, "06": 0.06 } },
-    "petrol-deep":   { "hex": "#11454E", "desc": "petroleo sobre claro (AA en papel). Texto/iconos." },
-    "petrol-bright": { "hex": "#52A0AC", "desc": "petroleo sobre navy. Lineas, KPI, estado activo." },
+    "petrol-deep":   { "hex": "#11454E", "desc": "petróleo sobre claro (AA en papel). Texto/iconos." },
+    "petrol-bright": { "hex": "#52A0AC", "desc": "petróleo sobre navy. Líneas, KPI, estado activo." },
 
     "ochre":         { "hex": "#A88A3A", "desc": "accent secundario. Rol de datos.",
+                       "alpha": { "12": 0.14, "06": 0.06 } },
+    "ochre-deep":    { "hex": "#7E641F", "desc": "ochre sobre claro. Texto e iconos de advertencia." },
+    "ochre-bright":  { "hex": "#C7A85A", "desc": "ochre sobre navy." },
+
+    "positive":      { "hex": "#2F7A3D", "desc": "resultado por encima de meta. Estado de dato, nunca superficie de marca.",
+                       "alpha": { "12": 0.12 } },
+    "positive-bright": { "hex": "#6FA97B", "desc": "positivo sobre navy. El #2F7A3D queda en 3.0:1 sobre fondo oscuro; este llega a 5.7:1." },
+    "negative":      { "hex": "#A8412B", "desc": "resultado por debajo de meta. Estado de dato, nunca superficie de marca.",
                        "alpha": { "12": 0.14 } },
-    "ochre-deep":    { "hex": "#7E641F", "desc": "ochre sobre claro." },
-    "ochre-bright":  { "hex": "#C7A85A", "desc": "ochre sobre navy." }
+    "negative-bright": { "hex": "#D08A75", "desc": "negativo sobre navy. Mismo rol que ochre-bright y petrol-bright: el valor sube, el tono se mantiene." }
   },
 
   "type": {
@@ -33,12 +45,59 @@
     "mono":    "'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace"
   },
 
-  "layout": {
-    "max": "1140px",
-    "r":   "4px"
+  "_display_doc": "Escala de display (Cormorant). Un solo lugar donde vive cada tamaño de titular, para que los componentes no reinventen su propio clamp. d1 es el hero; d2 a d6 son h1 a h4 más el tamaño de statement editorial.",
+  "display": {
+    "display-1": "clamp(3rem, 8vw, 6.5rem)",
+    "display-2": "clamp(2.6rem, 5vw, 4rem)",
+    "display-3": "clamp(2.1rem, 4vw, 3.2rem)",
+    "display-4": "clamp(1.5rem, 2.5vw, 2.1rem)",
+    "display-5": "clamp(1.3rem, 2vw, 1.7rem)",
+    "display-6": "clamp(1.15rem, 1.6vw, 1.4rem)"
   },
 
-  "_semantic_doc": "Capa de roles + alias --imb-*. NO son colores nuevos: apuntan a la paleta de arriba. Existe para que el design system (Claude Design) y builds que piensan en --accent/--fg/--bg/--imb-* tomen del kit en vez de redefinir local. Cambiar el rol = cambiar a que token apunta, aqui.",
+  "_text_doc": "Escala de texto (DM Sans) por rol, no por número. Seis pasos y ninguno más: si un componente necesita un tamaño nuevo, el rol está mal elegido. Mata los 10.5px y 13.5px que se habían colado.",
+  "text": {
+    "text-2xs":  "11px",
+    "text-xs":   "12px",
+    "text-sm":   "13px",
+    "text-md":   "14px",
+    "text-base": "15px",
+    "text-body": "17px",
+    "text-lead": "clamp(1.05rem, 1.7vw, 1.2rem)"
+  },
+
+  "_space_doc": "Escala de espacio, base 4px con progresión 1.33/1.5. Gobierna el ritmo macro: padding de sección, separación entre bloques, gaps de grilla. El padding interno menor a 24px de piezas chicas (pills, tags, celdas) se afina ópticamente y no está obligado a la escala.",
+  "space": {
+    "space-1":  "4px",
+    "space-2":  "8px",
+    "space-3":  "12px",
+    "space-4":  "16px",
+    "space-5":  "24px",
+    "space-6":  "32px",
+    "space-7":  "48px",
+    "space-8":  "72px",
+    "space-9":  "96px",
+    "space-10": "128px"
+  },
+
+  "_motion_doc": "Duraciones y curvas. Una sola familia de ease para todo el kit: salida exponencial desde un estado ya visible. slide es el único movimiento largo (cambio de lámina en deck).",
+  "motion": {
+    "dur-1": "160ms",
+    "dur-2": "240ms",
+    "dur-3": "420ms",
+    "dur-slide": "600ms",
+    "ease": "cubic-bezier(.2, .8, .2, 1)",
+    "ease-slide": "cubic-bezier(.7, 0, .3, 1)"
+  },
+
+  "layout": {
+    "max": "1140px",
+    "r":   "4px",
+    "measure": "68ch",
+    "measure-narrow": "54ch"
+  },
+
+  "_semantic_doc": "Capa de roles + alias --imb-*. NO son colores nuevos: apuntan a la paleta de arriba. Existe para que el design system (Claude Design) y builds que piensan en --accent/--fg/--bg/--imb-* tomen del kit en vez de redefinir local. Cambiar el rol = cambiar a qué token apunta, aquí.",
   "semantic": {
     "imb-navy":        "var(--navy)",
     "imb-navy-80":     "var(--navy-80)",
@@ -48,7 +107,9 @@
     "imb-navy-12":     "var(--navy-12)",
     "imb-navy-06":     "var(--navy-06)",
     "imb-slate":       "var(--gray-blue)",
+    "imb-slate-light": "var(--slate-light)",
     "imb-paper":       "var(--beige)",
+    "imb-cream":       "var(--cream)",
     "imb-white":       "var(--white)",
     "imb-petrol":      "var(--petrol)",
     "imb-petrol-deep": "var(--petrol-deep)",
@@ -60,6 +121,7 @@
     "bg":            "var(--beige)",
     "bg-dark":       "var(--navy)",
     "bg-surface":    "var(--white)",
+    "bg-chrome":     "var(--cream)",
     "fg":            "var(--navy)",
     "fg-muted":      "var(--navy-60)",
     "fg-subtle":     "var(--navy-40)",
@@ -68,12 +130,33 @@
     "border-strong": "var(--navy-20)",
     "eyebrow":       "var(--gray-blue)",
 
-    "accent":         "var(--petrol)",
-    "accent-strong":  "var(--petrol-deep)",
-    "accent-on-dark": "var(--petrol-bright)",
-    "accent-data":    "var(--ochre)",
+    "_on_dark_doc": "Tiers sobre navy. Reemplazan los rgba(255,255,255,.X) sueltos que se habían multiplicado por el kit. Regla: texto chico nunca baja de fg-on-dark-subtle; faint es solo para texto grande; line y surface no llevan texto encima.",
+    "fg-on-dark":            "var(--white)",
+    "fg-on-dark-muted":      "var(--white-78)",
+    "fg-on-dark-subtle":     "var(--white-62)",
+    "fg-on-dark-faint":      "var(--white-46)",
+    "border-on-dark":        "var(--white-16)",
+    "border-on-dark-strong": "var(--white-30)",
+    "surface-on-dark":       "var(--white-08)",
+    "eyebrow-on-dark":       "var(--slate-light)",
 
-    "_signal_doc": "La senal como rol funcional (alias de accent con el nombre de marca). El sitio apunta su --signal a estos. Contencion: la senal aparece SOLO en lineas de acento, hover y KPI, nunca como relleno de superficie ni color de parrafo.",
+    "accent":             "var(--petrol)",
+    "accent-strong":      "var(--petrol-deep)",
+    "accent-on-dark":     "var(--petrol-bright)",
+    "accent-data":        "var(--ochre)",
+    "accent-data-strong": "var(--ochre-deep)",
+
+    "positive-ink":   "var(--positive)",
+    "negative-ink":   "var(--negative)",
+    "positive-on-dark": "var(--positive-bright)",
+    "negative-on-dark": "var(--negative-bright)",
+
+    "_focus_doc": "Anillo de foco único del kit. Petróleo brillante porque es el único acento que sostiene contraste sobre papel y sobre navy sin cambiar de valor.",
+    "focus-ring":   "var(--petrol-bright)",
+    "focus-width":  "2px",
+    "focus-offset": "2px",
+
+    "_signal_doc": "La señal como rol funcional (alias de accent con el nombre de marca). El sitio apunta su --signal a estos. Contención: la señal aparece SOLO en líneas de acento, hover y KPI, nunca como relleno de superficie ni color de párrafo.",
     "signal":         "var(--petrol-bright)",
     "signal-on-dark": "var(--petrol-bright)",
     "signal-ink":     "var(--petrol-deep)",
@@ -104,7 +187,8 @@
     "chart-divider":   "var(--navy-20)",
     "chart-trend":     "var(--gray-blue)",
 
-    "chart-heatmap-low":            "rgba(207, 203, 198, .22)",
+    "_heatmap_doc": "El extremo bajo del secuencial sube de .22 a .35: a .22 la celda más baja se perdía contra la tarjeta blanca y el heatmap parecía tener huecos. El divergente es rojo/verde por decisión de negocio (lectura bueno/malo inmediata); por eso el valor SIEMPRE se imprime dentro de la celda, que es el canal que sostiene la lectura sin depender del color.",
+    "chart-heatmap-low":            "rgba(207, 203, 198, .35)",
     "chart-heatmap-high":           "var(--navy)",
     "chart-heatmap-diverging-neg":  "#A8412B",
     "chart-heatmap-diverging-mid":  "var(--navy-12)",

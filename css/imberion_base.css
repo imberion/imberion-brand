@@ -33,9 +33,18 @@
 
   /* Paleta secundaria */
   --gray-blue: #6F859C;
+  --slate-light: #8FA3B8;
   --beige: #CFCBC6;
   --beige-dark: rgba(207, 203, 198, .6);
+  --cream: #F6F4F0;
   --white: #fff;
+  --white-92: rgba(255, 255, 255, .92);
+  --white-78: rgba(255, 255, 255, .78);
+  --white-62: rgba(255, 255, 255, .62);
+  --white-46: rgba(255, 255, 255, .46);
+  --white-30: rgba(255, 255, 255, .3);
+  --white-16: rgba(255, 255, 255, .16);
+  --white-08: rgba(255, 255, 255, .08);
 
   /* Acentos de marca: petroleo (senal) + ochre (datos) */
   --petrol: #1C5F6B;
@@ -45,17 +54,65 @@
   --petrol-bright: #52A0AC;
   --ochre: #A88A3A;
   --ochre-12: rgba(168, 138, 58, .14);
+  --ochre-06: rgba(168, 138, 58, .06);
   --ochre-deep: #7E641F;
   --ochre-bright: #C7A85A;
+
+  /* Estados de dato. Solo charts y deltas, nunca superficie de marca. */
+  --positive: #2F7A3D;
+  --positive-12: rgba(47, 122, 61, .12);
+  --positive-bright: #6FA97B;
+  --negative: #A8412B;
+  --negative-12: rgba(168, 65, 43, .14);
+  --negative-bright: #D08A75;
 
   /* Tipografia */
   --font-display: 'Cormorant Garamond', Georgia, serif;
   --font-body: 'DM Sans', system-ui, -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', 'SF Mono', Menlo, Monaco, Consolas, monospace;
 
+  /* Escala de display (Cormorant) */
+  --display-1: clamp(3rem, 8vw, 6.5rem);
+  --display-2: clamp(2.6rem, 5vw, 4rem);
+  --display-3: clamp(2.1rem, 4vw, 3.2rem);
+  --display-4: clamp(1.5rem, 2.5vw, 2.1rem);
+  --display-5: clamp(1.3rem, 2vw, 1.7rem);
+  --display-6: clamp(1.15rem, 1.6vw, 1.4rem);
+
+  /* Escala de texto (DM Sans), por rol */
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-base: 15px;
+  --text-body: 17px;
+  --text-lead: clamp(1.05rem, 1.7vw, 1.2rem);
+
+  /* Escala de espacio */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 72px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* Motion: duraciones y curvas */
+  --dur-1: 160ms;
+  --dur-2: 240ms;
+  --dur-3: 420ms;
+  --dur-slide: 600ms;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --ease-slide: cubic-bezier(.7, 0, .3, 1);
+
   /* Layout */
   --max: 1140px;
   --r: 4px;
+  --measure: 68ch;
+  --measure-narrow: 54ch;
 
   /* Capa semantica: alias --imb-* + roles. Apuntan a la paleta de arriba. */
   --imb-navy: var(--navy);
@@ -66,7 +123,9 @@
   --imb-navy-12: var(--navy-12);
   --imb-navy-06: var(--navy-06);
   --imb-slate: var(--gray-blue);
+  --imb-slate-light: var(--slate-light);
   --imb-paper: var(--beige);
+  --imb-cream: var(--cream);
   --imb-white: var(--white);
   --imb-petrol: var(--petrol);
   --imb-petrol-deep: var(--petrol-deep);
@@ -77,6 +136,7 @@
   --bg: var(--beige);
   --bg-dark: var(--navy);
   --bg-surface: var(--white);
+  --bg-chrome: var(--cream);
   --fg: var(--navy);
   --fg-muted: var(--navy-60);
   --fg-subtle: var(--navy-40);
@@ -84,11 +144,26 @@
   --border: var(--navy-12);
   --border-strong: var(--navy-20);
   --eyebrow: var(--gray-blue);
+  --fg-on-dark: var(--white);
+  --fg-on-dark-muted: var(--white-78);
+  --fg-on-dark-subtle: var(--white-62);
+  --fg-on-dark-faint: var(--white-46);
+  --border-on-dark: var(--white-16);
+  --border-on-dark-strong: var(--white-30);
+  --surface-on-dark: var(--white-08);
+  --eyebrow-on-dark: var(--slate-light);
   --accent: var(--petrol);
   --accent-strong: var(--petrol-deep);
   --accent-on-dark: var(--petrol-bright);
   --accent-data: var(--ochre);
-  --_signal_doc: La senal como rol funcional (alias de accent con el nombre de marca). El sitio apunta su --signal a estos. Contencion: la senal aparece SOLO en lineas de acento, hover y KPI, nunca como relleno de superficie ni color de parrafo.;
+  --accent-data-strong: var(--ochre-deep);
+  --positive-ink: var(--positive);
+  --negative-ink: var(--negative);
+  --positive-on-dark: var(--positive-bright);
+  --negative-on-dark: var(--negative-bright);
+  --focus-ring: var(--petrol-bright);
+  --focus-width: 2px;
+  --focus-offset: 2px;
   --signal: var(--petrol-bright);
   --signal-on-dark: var(--petrol-bright);
   --signal-ink: var(--petrol-deep);
@@ -122,60 +197,87 @@ body {
   font-family: var(--font-body);
   background: var(--beige);
   color: var(--navy);
-  font-size: 17px;
+  font-size: var(--text-body);
   line-height: 1.65;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
 img { display: block; max-width: 100%; }
 a { color: inherit; text-decoration: none; }
 ul { list-style: none; }
 
+/* ---------- Foco ----------
+   Un solo anillo para todo el kit. :focus-visible y no :focus, para que el
+   anillo aparezca al navegar con teclado y no al hacer click. Ningun
+   componente puede hacer `outline: none` sin reemplazarlo: el foco invisible
+   deja el documento inoperable con teclado. */
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: var(--focus-width) solid var(--focus-ring);
+  outline-offset: var(--focus-offset);
+  border-radius: 1px;
+}
+
 /* ---------- Layout: container y section ---------- */
 .container {
   max-width: var(--max);
   margin: 0 auto;
-  padding: 0 36px;
+  padding: 0 var(--space-6);
 }
 
-.section { padding: 96px 0; }
-.section--dark { background: var(--navy); color: var(--white); }
+.section { padding: var(--space-9) 0; }
+.section--dark { background: var(--navy); color: var(--fg-on-dark-muted); }
 .section--dark h1,
 .section--dark h2,
 .section--dark h3,
-.section--dark h4 { color: var(--white); }
+.section--dark h4 { color: var(--fg-on-dark); }
 .section--tint { background: var(--beige); }
 
-/* ---------- Tipografia ---------- */
+/* ---------- Tipografia ----------
+   Los tamanos salen de la escala de display; ningun componente define su
+   propio clamp. text-wrap: balance evita la linea huerfana de una palabra en
+   titulares, que es donde mas se nota en Cormorant. */
 h1, h2, h3, h4 {
   font-family: var(--font-display);
   line-height: 1.12;
   font-weight: 400;
   color: var(--navy);
+  text-wrap: balance;
+  letter-spacing: -.012em;
 }
-h1 { font-size: clamp(2.6rem, 5vw, 4rem); font-weight: 300; }
-h2 { font-size: clamp(2.1rem, 4vw, 3.2rem); }
-h3 { font-size: clamp(1.3rem, 2vw, 1.7rem); }
-h4 { font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
+h1 { font-size: var(--display-2); font-weight: 300; letter-spacing: -.018em; }
+h2 { font-size: var(--display-3); }
+h3 { font-size: var(--display-5); letter-spacing: -.008em; }
+h4 { font-size: var(--display-6); letter-spacing: 0; }
+
+/* Medida de lectura. Un parrafo de cuerpo sin tope de ancho llega a 110
+   caracteres en desktop y el ojo pierde el renglon al volver. Se aplica por
+   contenedor de prosa y no a `p` suelto: un `p` capado dentro de un bloque
+   centrado se descuelga a la izquierda. */
+.prose { max-width: var(--measure); }
+.prose--narrow { max-width: var(--measure-narrow); }
+.prose > p + p { margin-top: 1em; }
+.prose--center { margin-inline: auto; }
 
 .eyebrow {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: var(--text-2xs);
   font-weight: 600;
   letter-spacing: .18em;
   text-transform: uppercase;
   color: var(--gray-blue);
-  margin-bottom: 14px;
+  margin-bottom: var(--space-3);
 }
-.section--dark .eyebrow { color: rgba(143, 163, 184, .65); }
+.section--dark .eyebrow { color: var(--eyebrow-on-dark); }
 
 .lead {
-  font-size: clamp(1.05rem, 1.7vw, 1.2rem);
+  font-size: var(--text-lead);
   color: var(--navy-60);
-  max-width: 620px;
+  max-width: var(--measure-narrow);
   line-height: 1.7;
+  text-wrap: pretty;
 }
-.section--dark .lead { color: rgba(255, 255, 255, .6); }
+.section--dark .lead { color: var(--fg-on-dark-subtle); }
 
 /* ---------- Navegacion ---------- */
 nav {
@@ -185,14 +287,14 @@ nav {
   right: 0;
   z-index: 100;
   background: var(--navy);
-  border-bottom: 1px solid rgba(255, 255, 255, .08);
-  padding: 0 36px;
-  transition: border-bottom-color .22s cubic-bezier(.4, 0, .2, 1),
-              box-shadow .22s cubic-bezier(.4, 0, .2, 1);
+  border-bottom: 1px solid var(--white-08);
+  padding: 0 var(--space-6);
+  transition: border-bottom-color var(--dur-2) var(--ease),
+              box-shadow var(--dur-2) var(--ease);
 }
 nav.imb-elevated {
-  border-bottom-color: rgba(255, 255, 255, .18);
-  box-shadow: 0 2px 24px rgba(0, 0, 0, .26);
+  border-bottom-color: var(--border-on-dark);
+  box-shadow: 0 2px 24px rgba(10, 24, 40, .38);
 }
 .nav-inner {
   max-width: var(--max);
@@ -205,94 +307,117 @@ nav.imb-elevated {
 .nav-logo img { height: 36px; width: auto; }
 .nav-links { display: flex; gap: 28px; align-items: center; }
 .nav-links a:not(.btn):not(.lang-btn) {
-  color: rgba(255, 255, 255, .65);
-  font-size: 14px;
+  color: var(--fg-on-dark-subtle);
+  font-size: var(--text-md);
   font-weight: 500;
-  transition: color .2s;
+  transition: color var(--dur-1) var(--ease);
 }
-.nav-links a:not(.btn):not(.lang-btn):hover { color: #fff; }
-.nav-links a.imb-active:not(.btn):not(.lang-btn) { color: #fff !important; }
-.nav-right { display: flex; gap: 14px; align-items: center; }
+.nav-links a:not(.btn):not(.lang-btn):hover { color: var(--fg-on-dark); }
+.nav-links a.imb-active:not(.btn):not(.lang-btn) { color: var(--fg-on-dark) !important; }
+.nav-right { display: flex; gap: var(--space-3); align-items: center; }
 
 .lang-toggle {
   display: flex;
   gap: 2px;
-  background: rgba(255, 255, 255, .08);
+  background: var(--surface-on-dark);
   border-radius: var(--r);
   padding: 3px;
 }
 .lang-btn {
   font-family: var(--font-body);
-  font-size: 11px;
+  font-size: var(--text-2xs);
   font-weight: 600;
   letter-spacing: .08em;
   text-transform: uppercase;
   padding: 5px 10px;
   border-radius: 2px;
   cursor: pointer;
-  color: rgba(255, 255, 255, .4);
-  transition: all .18s;
+  color: var(--fg-on-dark-faint);
+  transition: color var(--dur-1) var(--ease), background var(--dur-1) var(--ease);
   border: none;
   background: transparent;
 }
-.lang-btn.active { background: rgba(255, 255, 255, .15); color: #fff; }
-.lang-btn:hover:not(.active) { color: rgba(255, 255, 255, .7); }
+.lang-btn.active { background: var(--border-on-dark); color: var(--fg-on-dark); }
+.lang-btn:hover:not(.active) { color: var(--fg-on-dark-muted); }
 
-/* ---------- Botones ---------- */
+/* ---------- Botones ----------
+   Cuatro variantes, un solo juego de estados. Cualquier boton nuevo hereda de
+   .btn y solo cambia superficie: si necesita otro padding o peso, el rol esta
+   mal elegido. */
 .btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
   padding: 10px 22px;
   border-radius: var(--r);
-  font-size: 14px;
+  font-family: var(--font-body);
+  font-size: var(--text-md);
   font-weight: 600;
+  line-height: 1.2;
   cursor: pointer;
-  border: none;
-  transition: all .2s;
+  border: 1px solid transparent;
+  transition: background var(--dur-1) var(--ease),
+              border-color var(--dur-1) var(--ease),
+              color var(--dur-1) var(--ease);
 }
+.btn:active { transform: translateY(1px); }
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: .45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
 .btn-primary { background: var(--white); color: var(--navy); }
 .btn-primary:hover { background: var(--beige); }
 
-.btn-accent { background: var(--petrol); color: #fff; }
+.btn-accent { background: var(--petrol); color: var(--white); }
 .btn-accent:hover { background: var(--petrol-deep); }
 
 .btn-outline {
   background: transparent;
-  border: 1.5px solid rgba(255, 255, 255, .22);
-  color: rgba(255, 255, 255, .8);
+  border-color: var(--border-on-dark-strong);
+  color: var(--fg-on-dark-muted);
 }
 .btn-outline:hover {
-  border-color: rgba(255, 255, 255, .55);
-  background: rgba(255, 255, 255, .05);
+  border-color: var(--fg-on-dark-subtle);
+  color: var(--fg-on-dark);
+  background: var(--white-08);
 }
 
 .btn-signal {
   background: var(--navy);
-  color: #fff;
+  color: var(--fg-on-dark);
   padding: 14px 32px;
-  font-size: 15px;
-  border: 1.5px solid rgba(255, 255, 255, .3);
+  font-size: var(--text-base);
+  border-color: var(--border-on-dark-strong);
 }
-.btn-signal:hover { background: rgba(15, 42, 63, .85); }
+.btn-signal:hover {
+  background: var(--navy);
+  border-color: var(--accent-on-dark);
+  color: var(--fg-on-dark);
+}
 
 .inline-cta {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font-size: 13px;
+  font-size: var(--text-sm);
   font-weight: 600;
   color: var(--gray-blue);
   letter-spacing: .04em;
-  transition: opacity .2s;
+  transition: color var(--dur-1) var(--ease);
 }
-.inline-cta:hover { opacity: .7; }
-.inline-cta.white { color: rgba(255, 255, 255, .7); }
-.inline-cta.white:hover { color: #fff; opacity: 1; }
+.inline-cta:hover { color: var(--petrol-deep); }
+.inline-cta.white { color: var(--fg-on-dark-muted); }
+.inline-cta.white:hover { color: var(--accent-on-dark); }
 .inline-cta--accent { color: var(--petrol-deep); }
+.inline-cta--accent:hover { color: var(--petrol); }
 
 /* ---------- Tags ---------- */
 .tag {
-  font-size: 11px;
+  font-size: var(--text-2xs);
   font-weight: 500;
   letter-spacing: .06em;
   padding: 4px 10px;
@@ -300,15 +425,15 @@ nav.imb-elevated {
   background: var(--navy-06);
   color: var(--navy-60);
 }
-.tag-light { background: rgba(255, 255, 255, .12); color: rgba(255, 255, 255, .8); }
+.tag-light { background: var(--white-16); color: var(--fg-on-dark-muted); }
 .tag--accent { background: var(--petrol-12); color: var(--petrol-deep); }
 
 /* ---------- Reveal animations ---------- */
 .imb-reveal {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity .42s cubic-bezier(.2, .8, .2, 1),
-              transform .42s cubic-bezier(.2, .8, .2, 1);
+  transition: opacity var(--dur-3) var(--ease),
+              transform var(--dur-3) var(--ease);
 }
 .imb-reveal.imb-in { opacity: 1; transform: none; }
 .imb-reveal[data-d="1"] { transition-delay: .07s; }
@@ -316,10 +441,6 @@ nav.imb-elevated {
 .imb-reveal[data-d="3"] { transition-delay: .21s; }
 .imb-reveal[data-d="4"] { transition-delay: .28s; }
 .imb-reveal[data-d="5"] { transition-delay: .35s; }
-
-@media (prefers-reduced-motion: reduce) {
-  .imb-reveal { opacity: 1; transform: none; transition: none; }
-}
 
 /* ---------- Section dividers ----------
    La textura diagonal vive en assets/textures/04_diagonal_section_divider.png.
@@ -336,7 +457,25 @@ nav.imb-elevated {
 
 /* ---------- Responsive base ---------- */
 @media (max-width: 600px) {
-  .container { padding: 0 20px; }
-  nav { padding: 0 20px; }
+  .container { padding: 0 var(--space-5); }
+  nav { padding: 0 var(--space-5); }
   .nav-links { display: none; }
+}
+
+/* ---------- Movimiento reducido ----------
+   Guarda global, no por componente. Cubre reveals, carrusel, hover-lifts,
+   scroll suave y el avance de lamina del deck de una sola vez, para que un
+   componente nuevo quede cubierto sin acordarse de nada. El contenido queda
+   en su estado final visible, nunca oculto. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .imb-reveal { opacity: 1; transform: none; }
 }

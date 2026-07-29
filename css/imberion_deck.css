@@ -13,7 +13,8 @@
    filter: invert(1) brightness(1.15) sobre la misma data URI.
 
    Owner: Rodrigo Garrido
-   Ultima actualizacion: 2026-05-27
+   Ultima actualizacion: 2026-07-28 (progreso por scaleX, chrome en --cream,
+   tiers sobre navy tokenizados)
    ============================================================ */
 
 /* ============================================================
@@ -31,7 +32,7 @@
   width: 100%;
   height: 100%;
   display: flex;
-  transition: transform 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+  transition: transform var(--dur-slide) var(--ease-slide);
 }
 
 .slide {
@@ -47,8 +48,13 @@
 
 .slide-dark {
   background: var(--navy);
-  color: var(--white);
+  color: var(--fg-on-dark-muted);
 }
+.slide-dark h1,
+.slide-dark h2,
+.slide-dark h3,
+.slide-dark h4 { color: var(--fg-on-dark); }
+.slide-dark .eyebrow { color: var(--eyebrow-on-dark); }
 
 .slide-inner {
   width: 100%;
@@ -97,7 +103,7 @@
   right: 5vw;
   z-index: 5;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-2xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--navy-60);
@@ -109,7 +115,7 @@
 .slide.hero .slide-confidential,
 .slide.closing .slide-confidential,
 .slide.slide-dark .slide-confidential {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--fg-on-dark-subtle);
 }
 
 /* ============================================================
@@ -124,17 +130,17 @@
   left: 0;
   right: 0;
   height: 56px;
-  background: rgba(245, 241, 234, 0.92);
+  background: color-mix(in srgb, var(--cream) 92%, transparent);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-top: 1px solid var(--navy-12);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 24px;
+  padding: 0 var(--space-5);
   z-index: 100;
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: var(--text-2xs);
   letter-spacing: 0.15em;
   color: var(--navy-60);
 }
@@ -147,7 +153,7 @@
 .nav-center {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: var(--space-4);
 }
 
 .nav-btn {
@@ -159,9 +165,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  font-size: var(--text-md);
   color: var(--navy);
-  transition: all 0.2s;
+  transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease), border-color var(--dur-1) var(--ease);
   font-family: var(--font-mono);
 }
 
@@ -187,7 +193,7 @@
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: var(--space-3);
 }
 
 /* ============================================================
@@ -205,11 +211,18 @@
   z-index: 101;
 }
 
+/* El avance se pinta con scaleX y no con width: animar width recalcula layout
+   en cada frame del cambio de lamina, justo cuando el deck ya esta moviendo el
+   wrapper completo. El consumidor escribe --progress (0 a 1).
+   El fallback es 1, no 0, a proposito: un deck viejo que siga seteando
+   style.width = "40%" pinta 40% con la escala neutra en vez de desaparecer. */
 .nav-progress-fill {
   height: 100%;
-  background: var(--gray-blue);
-  width: 0;
-  transition: width 0.6s cubic-bezier(0.7, 0, 0.3, 1);
+  width: 100%;
+  background: var(--accent);
+  transform: scaleX(var(--progress, 1));
+  transform-origin: left center;
+  transition: transform var(--dur-slide) var(--ease-slide);
 }
 
 /* ============================================================
@@ -222,11 +235,11 @@
   bottom: 72px;
   right: 24px;
   font-family: var(--font-mono);
-  font-size: 10px;
+  font-size: var(--text-2xs);
   letter-spacing: 0.15em;
   color: var(--navy-60);
   z-index: 100;
-  opacity: 0.6;
+  opacity: 1;
   text-transform: uppercase;
   pointer-events: none;
   transition: opacity 0.3s;
