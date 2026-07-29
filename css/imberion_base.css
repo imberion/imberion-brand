@@ -161,7 +161,8 @@
   --negative-ink: var(--negative);
   --positive-on-dark: var(--positive-bright);
   --negative-on-dark: var(--negative-bright);
-  --focus-ring: var(--petrol-bright);
+  --focus-ring: var(--petrol-deep);
+  --focus-ring-on-dark: var(--petrol-bright);
   --focus-width: 2px;
   --focus-offset: 2px;
   --signal: var(--petrol-bright);
@@ -216,6 +217,12 @@ ul { list-style: none; }
   outline: var(--focus-width) solid var(--focus-ring);
   outline-offset: var(--focus-offset);
   border-radius: 1px;
+}
+/* Sobre navy el anillo sube de valor. No es otro color: es el mismo petroleo
+   en su version clara, que es la unica que despega del fondo oscuro. */
+:where(.section--dark, .hero, .mat-section, .cta-section, nav, footer)
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline-color: var(--focus-ring-on-dark);
 }
 
 /* ---------- Layout: container y section ---------- */
@@ -395,7 +402,7 @@ nav.imb-elevated {
 }
 .btn-signal:hover {
   background: var(--navy);
-  border-color: var(--accent-on-dark);
+  border-color: var(--fg-on-dark-subtle);
   color: var(--fg-on-dark);
 }
 
@@ -409,11 +416,11 @@ nav.imb-elevated {
   letter-spacing: .04em;
   transition: color var(--dur-1) var(--ease);
 }
-.inline-cta:hover { color: var(--petrol-deep); }
+.inline-cta:hover { color: var(--navy); }
 .inline-cta.white { color: var(--fg-on-dark-muted); }
-.inline-cta.white:hover { color: var(--accent-on-dark); }
+.inline-cta.white:hover { color: var(--fg-on-dark); }
 .inline-cta--accent { color: var(--petrol-deep); }
-.inline-cta--accent:hover { color: var(--petrol); }
+.inline-cta--accent:hover { color: var(--petrol-deep); }
 
 /* ---------- Tags ---------- */
 .tag {

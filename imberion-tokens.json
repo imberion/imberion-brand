@@ -151,8 +151,9 @@
     "positive-on-dark": "var(--positive-bright)",
     "negative-on-dark": "var(--negative-bright)",
 
-    "_focus_doc": "Anillo de foco único del kit. Petróleo brillante porque es el único acento que sostiene contraste sobre papel y sobre navy sin cambiar de valor.",
-    "focus-ring":   "var(--petrol-bright)",
+    "_focus_doc": "Anillo de foco del kit. Un solo color con dos valores, no dos colores: petrol-deep sobre papel (6.2:1) y petrol-bright sobre navy. Ningún valor único sirve para las dos superficies: petrol-bright sobre beige da 2.4:1 y petrol-deep sobre navy da 1.9:1, ambos por debajo del 3:1 que pide un indicador de foco.",
+    "focus-ring":   "var(--petrol-deep)",
+    "focus-ring-on-dark": "var(--petrol-bright)",
     "focus-width":  "2px",
     "focus-offset": "2px",
 

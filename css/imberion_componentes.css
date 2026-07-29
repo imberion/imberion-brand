@@ -228,7 +228,7 @@
   transition: background var(--dur-2) var(--ease);
 }
 .arm-card.b::before { background: var(--navy-20); }
-.arm-card:hover::before { background: var(--accent); }
+.arm-card:hover::before { background: var(--gray-blue); }
 .arm-card.b:hover::before { background: var(--navy); }
 .arm-letter {
   font-family: var(--font-display);
@@ -290,7 +290,7 @@
   line-height: 1.55;
   font-style: italic;
   text-align: center;
-  border-top: 1px solid var(--accent-on-dark);
+  border-top: 1px solid var(--border-on-dark-strong);
 }
 .arm-bridge {
   margin-top: 2px;
@@ -376,8 +376,8 @@
   background: var(--navy-12);
   transition: background var(--dur-2) var(--ease);
 }
-.mod-card:hover::before { background: var(--accent); }
-.mod-card:hover .mod-icon { color: var(--accent); }
+.mod-card:hover::before { background: var(--gray-blue); }
+.mod-card:hover .mod-icon { color: var(--navy-60); }
 .mod-icon {
   font-size: 20px;
   margin-bottom: 10px;
@@ -437,7 +437,7 @@
 }
 .solve-bullets:hover li { opacity: .4; }
 .solve-bullets:hover li:hover { opacity: 1; color: var(--navy); }
-.solve-bullets:hover li:hover::before { color: var(--accent); }
+.solve-bullets:hover li:hover::before { color: var(--navy); }
 .solve-bridge {
   margin-top: var(--space-6);
   padding-top: var(--space-6);
@@ -521,7 +521,7 @@
 .impact-card {
   padding: var(--space-6) var(--space-6);
   border: 1px solid var(--white-08);
-  border-top: 2px solid var(--accent-on-dark);
+  border-top: 2px solid var(--slate-light);
 }
 .impact-num {
   font-family: var(--font-body);
@@ -589,7 +589,7 @@
   transition: background var(--dur-2) var(--ease);
 }
 .serve-card.active::before,
-.serve-card:hover::before { background: var(--accent); }
+.serve-card:hover::before { background: var(--gray-blue); }
 .serve-card h3 { font-size: var(--display-5); margin-bottom: var(--space-3); }
 .serve-card p { font-size: var(--text-base); color: var(--navy-60); line-height: 1.65; }
 .serve-link {
