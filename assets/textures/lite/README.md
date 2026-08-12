@@ -1,4 +1,12 @@
-# Texturas lite
+# Texturas lite (set cálido, EN RETIRO)
+
+> **Este set salió del chasis.** Su base coincide en matiz (48°) y luminosidad con el oat
+> que usan las herramientas generativas, y su amplitud de fibra medía 0.37%, o sea que se
+> leían como tinte plano. El set vigente es `../frio/` (ver su README).
+>
+> Se conservan porque seis `_build.py` de cliente las referencian. No usar en material nuevo.
+> Las dos navy (`01_hero_dust_navy`, `11_cta_dust_navy`) **no** son legacy: siguen siendo
+> portada y cierre.
 
 Versiones optimizadas (JPEG ~900px, q66) del set de texturas editoriales. Espejo lite de los PNG master de la carpeta padre.
 

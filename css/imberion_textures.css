@@ -17,6 +17,74 @@
    Ultima actualizacion: 2026-05-27
    =========================================================================== */
 
+/* ---------------------------------------------------------------------------
+   Set frio (sistema de superficies vigente)
+   ---------------------------------------------------------------------------
+   Una fibra constante (identidad) sobre dos bases frias, con seis atmosferas
+   de luz (ritmo). Generadas por assets/textures/_build_texturas_frias.py, que
+   ademas corre el gate de contraste: ninguna baja de 4.5:1 con --fg-muted.
+
+   REGLA DE AREA: estas texturas van SOLO en superficies a sangre (lamina
+   completa o banda de ancho completo). En un recuadro chico la fibra no
+   alcanza a formar patron y se lee como suciedad de impresion. Los paneles
+   internos van con tinte liso: --page-aside / --page-group.
+
+   Portada y cierre siguen en navy con las texturas 01 y 11 de abajo.
+   ------------------------------------------------------------------------- */
+
+:root {
+  /* Base papel frio (--paper-cool). El aparte y la lamina de argumento. */
+  --tex-papel-plana:    url('../assets/textures/frio/papel_plana.jpg');
+  --tex-papel-brumaizq: url('../assets/textures/frio/papel_brumaizq.jpg');
+  --tex-papel-brumader: url('../assets/textures/frio/papel_brumader.jpg');
+  --tex-papel-foco:     url('../assets/textures/frio/papel_foco.jpg');
+  --tex-papel-luzalta:  url('../assets/textures/frio/papel_luzalta.jpg');
+  --tex-papel-diagonal: url('../assets/textures/frio/papel_diagonal.jpg');
+
+  /* Base blanco frio (--paper-cool-light). Cuando el blanco puro corta. */
+  --tex-blanco-plana:    url('../assets/textures/frio/blanco_plana.jpg');
+  --tex-blanco-brumaizq: url('../assets/textures/frio/blanco_brumaizq.jpg');
+  --tex-blanco-brumader: url('../assets/textures/frio/blanco_brumader.jpg');
+  --tex-blanco-foco:     url('../assets/textures/frio/blanco_foco.jpg');
+  --tex-blanco-luzalta:  url('../assets/textures/frio/blanco_luzalta.jpg');
+  --tex-blanco-diagonal: url('../assets/textures/frio/blanco_diagonal.jpg');
+}
+
+.surf-papel, .surf-blanco {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.surf-papel  { background-color: var(--paper-cool, #EDEEEF); }
+.surf-blanco { background-color: var(--paper-cool-light, #F9FAFB); }
+
+.surf-papel.atm-plana    { background-image: var(--tex-papel-plana); }
+.surf-papel.atm-brumaizq { background-image: var(--tex-papel-brumaizq); }
+.surf-papel.atm-brumader { background-image: var(--tex-papel-brumader); }
+.surf-papel.atm-foco     { background-image: var(--tex-papel-foco); }
+.surf-papel.atm-luzalta  { background-image: var(--tex-papel-luzalta); }
+.surf-papel.atm-diagonal { background-image: var(--tex-papel-diagonal); }
+
+.surf-blanco.atm-plana    { background-image: var(--tex-blanco-plana); }
+.surf-blanco.atm-brumaizq { background-image: var(--tex-blanco-brumaizq); }
+.surf-blanco.atm-brumader { background-image: var(--tex-blanco-brumader); }
+.surf-blanco.atm-foco     { background-image: var(--tex-blanco-foco); }
+.surf-blanco.atm-luzalta  { background-image: var(--tex-blanco-luzalta); }
+.surf-blanco.atm-diagonal { background-image: var(--tex-blanco-diagonal); }
+
+/* Las texturas frias ya traen su propia luz. No llevan scrim: el scrim se
+   inventó para las calidas, que necesitaban lavarse para dejar leer. */
+
+/* ---------------------------------------------------------------------------
+   Set calido (LEGACY)
+   ---------------------------------------------------------------------------
+   En retiro. Su base coincide en matiz (48 grados) y luminosidad con el oat de
+   las herramientas generativas, y su amplitud de fibra es de 0.37%, o sea que
+   se leen como tinte plano. Se conservan porque seis _build.py de cliente
+   todavia las referencian; no usar en material nuevo. Las dos navy (01 y 11)
+   NO son legacy: siguen siendo portada y cierre.
+   ------------------------------------------------------------------------- */
+
 :root {
   --texture-hero-dust: url('../assets/textures/01_hero_dust_navy.png');
   --texture-paper: url('../assets/textures/02_paper_grain_visible.png');

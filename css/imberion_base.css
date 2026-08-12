@@ -25,7 +25,9 @@
   /* Paleta primaria */
   --navy: #0A1828;
   --navy-80: rgba(10, 24, 40, .8);
+  --navy-72: rgba(10, 24, 40, .72);
   --navy-60: rgba(10, 24, 40, .6);
+  --navy-55: rgba(10, 24, 40, .55);
   --navy-40: rgba(10, 24, 40, .4);
   --navy-20: rgba(10, 24, 40, .2);
   --navy-12: rgba(10, 24, 40, .12);
@@ -37,6 +39,8 @@
   --beige: #CFCBC6;
   --beige-dark: rgba(207, 203, 198, .6);
   --cream: #F6F4F0;
+  --paper-cool: #EDEEEF;
+  --paper-cool-light: #F9FAFB;
   --white: #fff;
   --white-92: rgba(255, 255, 255, .92);
   --white-78: rgba(255, 255, 255, .78);
@@ -117,7 +121,9 @@
   /* Capa semantica: alias --imb-* + roles. Apuntan a la paleta de arriba. */
   --imb-navy: var(--navy);
   --imb-navy-80: var(--navy-80);
+  --imb-navy-72: var(--navy-72);
   --imb-navy-60: var(--navy-60);
+  --imb-navy-55: var(--navy-55);
   --imb-navy-40: var(--navy-40);
   --imb-navy-20: var(--navy-20);
   --imb-navy-12: var(--navy-12);
@@ -125,6 +131,8 @@
   --imb-slate: var(--gray-blue);
   --imb-slate-light: var(--slate-light);
   --imb-paper: var(--beige);
+  --imb-paper-cool: var(--paper-cool);
+  --imb-paper-cool-light: var(--paper-cool-light);
   --imb-cream: var(--cream);
   --imb-white: var(--white);
   --imb-petrol: var(--petrol);
@@ -137,9 +145,13 @@
   --bg-dark: var(--navy);
   --bg-surface: var(--white);
   --bg-chrome: var(--cream);
+  --page: var(--white);
+  --page-aside: var(--paper-cool);
+  --page-group: var(--paper-cool-light);
+  --page-dark: var(--navy);
   --fg: var(--navy);
-  --fg-muted: var(--navy-60);
-  --fg-subtle: var(--navy-40);
+  --fg-muted: var(--navy-72);
+  --fg-subtle: var(--navy-55);
   --fg-inverse: var(--white);
   --border: var(--navy-12);
   --border-strong: var(--navy-20);
