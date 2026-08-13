@@ -40,14 +40,6 @@
   --tex-papel-foco:     url('../assets/textures/frio/papel_foco.jpg');
   --tex-papel-luzalta:  url('../assets/textures/frio/papel_luzalta.jpg');
   --tex-papel-diagonal: url('../assets/textures/frio/papel_diagonal.jpg');
-
-  /* Base blanco frio (--paper-cool-light). Cuando el blanco puro corta. */
-  --tex-blanco-plana:    url('../assets/textures/frio/blanco_plana.jpg');
-  --tex-blanco-brumaizq: url('../assets/textures/frio/blanco_brumaizq.jpg');
-  --tex-blanco-brumader: url('../assets/textures/frio/blanco_brumader.jpg');
-  --tex-blanco-foco:     url('../assets/textures/frio/blanco_foco.jpg');
-  --tex-blanco-luzalta:  url('../assets/textures/frio/blanco_luzalta.jpg');
-  --tex-blanco-diagonal: url('../assets/textures/frio/blanco_diagonal.jpg');
 }
 
 .surf-papel, .surf-blanco {
@@ -65,12 +57,12 @@
 .surf-papel.atm-luzalta  { background-image: var(--tex-papel-luzalta); }
 .surf-papel.atm-diagonal { background-image: var(--tex-papel-diagonal); }
 
-.surf-blanco.atm-plana    { background-image: var(--tex-blanco-plana); }
-.surf-blanco.atm-brumaizq { background-image: var(--tex-blanco-brumaizq); }
-.surf-blanco.atm-brumader { background-image: var(--tex-blanco-brumader); }
-.surf-blanco.atm-foco     { background-image: var(--tex-blanco-foco); }
-.surf-blanco.atm-luzalta  { background-image: var(--tex-blanco-luzalta); }
-.surf-blanco.atm-diagonal { background-image: var(--tex-blanco-diagonal); }
+/* .surf-blanco es tinte liso y no acepta .atm-*: es aritmetica, no gusto.
+   El grano necesita margen hacia el blanco para tener hacia donde subir.
+   #EDEEEF deja 6.7% y alcanza; #F9FAFB deja 1.6% mientras la fibra sola pide
+   ~3.6% en sus picos, asi que un tercio de la superficie quedaba aplanada
+   contra el 255 y la textura dejaba de modular. Si hace falta grano sobre una
+   superficie clara, la respuesta es .surf-papel, no bajarle la fibra a esta. */
 
 /* Las texturas frias ya traen su propia luz. No llevan scrim: el scrim se
    inventó para las calidas, que necesitaban lavarse para dejar leer. */
