@@ -131,10 +131,10 @@
     "bg-surface":    "var(--white)",
     "bg-chrome":     "var(--cream)",
 
-    "_superficie_doc": "Roles de superficie del deck y del documento. bg/bg-surface siguen sirviendo al sitio (beige de respiración); estos cuatro son los del formato impreso y de presentación, donde la página es blanca.",
-    "page":          "var(--white)",
+    "_superficie_doc": "Roles de superficie del deck y del documento. bg/bg-surface siguen sirviendo al sitio (beige de respiración); estos cuatro son los del formato impreso y de presentación, y no tocan el sitio. La hoja es blanco frío, no blanco puro: el blanco puro corta, y deja al sistema sin lugar a donde bajar cuando algo tiene que leerse como fondo sin separarse. Al subir la hoja a paper-cool-light, el agrupamiento sin separación (page-group) pasa a blanco puro y queda MÁS claro que la hoja, no más oscuro: es lo que las plantillas ya hacían con las filas alternas de tabla. Los tres escalones claros siguen siendo tres: hoja (paper-cool-light), agrupa (white), aparte (paper-cool).",
+    "page":          "var(--paper-cool-light)",
     "page-aside":    "var(--paper-cool)",
-    "page-group":    "var(--paper-cool-light)",
+    "page-group":    "var(--white)",
     "page-dark":     "var(--navy)",
 
     "fg":            "var(--navy)",

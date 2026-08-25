@@ -145,9 +145,9 @@
   --bg-dark: var(--navy);
   --bg-surface: var(--white);
   --bg-chrome: var(--cream);
-  --page: var(--white);
+  --page: var(--paper-cool-light);
   --page-aside: var(--paper-cool);
-  --page-group: var(--paper-cool-light);
+  --page-group: var(--white);
   --page-dark: var(--navy);
   --fg: var(--navy);
   --fg-muted: var(--navy-72);
