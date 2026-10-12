@@ -442,7 +442,7 @@ nav.imb-elevated {
   padding: 4px 10px;
   border-radius: 2px;
   background: var(--navy-06);
-  color: var(--navy-60);
+  color: var(--navy-72);
 }
 .tag-light { background: var(--white-16); color: var(--fg-on-dark-muted); }
 .tag--accent { background: var(--petrol-12); color: var(--petrol-deep); }

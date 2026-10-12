@@ -6,7 +6,7 @@
    vertical continuo).
 
    Depende de variables ya definidas en imberion_base.css:
-   --navy, --navy-60, --navy-12, --beige, --white, --gray-blue,
+   --navy, --navy-72, --navy-60, --navy-12, --beige, --white, --gray-blue,
    --font-mono, --logo.
 
    Convencion: para logos en contextos oscuros, aplicar
@@ -106,7 +106,7 @@
   font-size: var(--text-2xs);
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--navy-60);
+  color: var(--navy-72);
   pointer-events: none;
   -webkit-print-color-adjust: exact;
   print-color-adjust: exact;
@@ -142,7 +142,7 @@
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
   letter-spacing: 0.15em;
-  color: var(--navy-60);
+  color: var(--navy-72);
 }
 
 .nav-brand {
@@ -237,7 +237,7 @@
   font-family: var(--font-mono);
   font-size: var(--text-2xs);
   letter-spacing: 0.15em;
-  color: var(--navy-60);
+  color: var(--navy-72);
   z-index: 100;
   opacity: 1;
   text-transform: uppercase;

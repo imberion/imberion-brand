@@ -15,7 +15,7 @@
 
 :root {
   --imb-tour-navy: var(--navy, #0A1828);
-  --imb-tour-navy-60: var(--navy-60, rgba(10, 24, 40, .6));
+  --imb-tour-navy-72: var(--navy-72, rgba(10, 24, 40, .72));
   --imb-tour-navy-12: var(--navy-12, rgba(10, 24, 40, .12));
   --imb-tour-navy-06: var(--navy-06, rgba(10, 24, 40, .06));
   --imb-tour-grayblue: var(--gray-blue, #6F859C);
@@ -92,14 +92,14 @@
   font-family: var(--imb-tour-font-body);
   font-size: var(--text-md, 14px);
   line-height: 1.6;
-  color: var(--imb-tour-navy-60);
+  color: var(--imb-tour-navy-72);
   margin: 0 0 20px;
 }
 .imb-tour-welcome .imb-tour-wbtns { display: flex; gap: 9px; }
 .imb-tour-welcome .imb-tour-note {
   font-family: var(--imb-tour-font-body);
   font-size: var(--text-2xs, 11px);
-  color: var(--imb-tour-navy-60);
+  color: var(--imb-tour-navy-72);
   margin-top: 15px;
 }
 
@@ -147,7 +147,7 @@
   margin: 0 0 14px;
   font-size: var(--text-sm, 13px);
   line-height: 1.55;
-  color: var(--imb-tour-navy-60);
+  color: var(--imb-tour-navy-72);
 }
 .imb-tour-tip .imb-tour-row {
   display: flex;
@@ -181,7 +181,7 @@
 .imb-tour-b:hover { background: var(--imb-tour-paper); }
 .imb-tour-b.is-primary { background: var(--imb-tour-navy); color: #fff; border-color: var(--imb-tour-navy); }
 .imb-tour-b.is-primary:hover { background: var(--imb-tour-navy-hover); }
-.imb-tour-b.is-ghost { border-color: transparent; color: var(--imb-tour-navy-60); }
+.imb-tour-b.is-ghost { border-color: transparent; color: var(--imb-tour-navy-72); }
 .imb-tour-b:focus-visible { outline: 2px solid var(--imb-tour-focus); outline-offset: 2px; }
 
 /* --- Respeto a prefers-reduced-motion ------------------------------------- */
