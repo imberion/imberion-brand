@@ -291,7 +291,7 @@ h4 { font-size: var(--display-6); letter-spacing: 0; }
 
 .lead {
   font-size: var(--text-lead);
-  color: var(--navy-60);
+  color: var(--navy-72);
   max-width: var(--measure-narrow);
   line-height: 1.7;
   text-wrap: pretty;
